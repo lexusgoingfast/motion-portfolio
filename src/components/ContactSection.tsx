@@ -28,8 +28,9 @@ export default function ContactSection() {
 
   return (
     <section ref={ref} id="contact">
-      <div style={{ padding: isMobile ? '20px 24px' : '20px 48px', borderBottom: '1px solid var(--border)', fontSize: 10, color: 'var(--muted)',  }}>
-        {tx.contact_label}
+      <div style={{ padding: isMobile ? '20px 24px' : '20px 48px', borderBottom: '1px solid var(--border)', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+        <span style={{ fontSize: 10, color: 'var(--muted)', letterSpacing: '0.08em' }}>{tx.contact_label}</span>
+        <span style={{ fontSize: 10, color: 'var(--muted)', letterSpacing: '0.06em' }}>05</span>
       </div>
 
       <div style={{

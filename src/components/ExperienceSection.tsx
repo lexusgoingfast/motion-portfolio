@@ -34,9 +34,13 @@ export default function ExperienceSection() {
         borderBottom: '1px solid var(--border)',
         display: 'flex',
         justifyContent: 'space-between',
+        alignItems: 'center',
       }}>
-        <span style={{ fontSize: 10, color: 'var(--muted)' }}>{tx.exp_label}</span>
-        {!isMobile && <span style={{ fontSize: 10, color: 'var(--muted)' }}>{tx.edu_label}</span>}
+        <span style={{ fontSize: 10, color: 'var(--muted)', letterSpacing: '0.08em' }}>{tx.exp_label}</span>
+        <div style={{ display: 'flex', alignItems: 'center', gap: 40 }}>
+          {!isMobile && <span style={{ fontSize: 10, color: 'var(--muted)', letterSpacing: '0.08em' }}>{tx.edu_label}</span>}
+          <span style={{ fontSize: 10, color: 'var(--muted)', letterSpacing: '0.06em' }}>04</span>
+        </div>
       </div>
 
       {isMobile ? (

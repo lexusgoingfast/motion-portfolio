@@ -17,8 +17,9 @@ export default function AboutSection() {
 
   return (
     <section ref={ref} id="about" style={{ borderBottom: '1px solid var(--border)' }}>
-      <div style={{ padding: lp, borderBottom: '1px solid var(--border)', fontSize: 10, color: 'var(--muted)' }}>
-        {tx.about_label}
+      <div style={{ padding: lp, borderBottom: '1px solid var(--border)', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+        <span style={{ fontSize: 10, color: 'var(--muted)', letterSpacing: '0.08em' }}>{tx.about_label}</span>
+        <span style={{ fontSize: 10, color: 'var(--muted)', letterSpacing: '0.06em' }}>02</span>
       </div>
 
       <div style={{

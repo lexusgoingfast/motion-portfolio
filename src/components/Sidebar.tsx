@@ -12,11 +12,21 @@ export default function Sidebar() {
   const [infoOpen, setInfoOpen] = useState(false)
   const [mobileOpen, setMobileOpen] = useState(false)
   const [isMobile, setIsMobile] = useState(window.innerWidth < 768)
+  const [scrollProgress, setScrollProgress] = useState(0)
 
   useEffect(() => {
     const onResize = () => setIsMobile(window.innerWidth < 768)
     window.addEventListener('resize', onResize)
     return () => window.removeEventListener('resize', onResize)
+  }, [])
+
+  useEffect(() => {
+    const onScroll = () => {
+      const max = document.documentElement.scrollHeight - window.innerHeight
+      setScrollProgress(max > 0 ? window.scrollY / max : 0)
+    }
+    window.addEventListener('scroll', onScroll, { passive: true })
+    return () => window.removeEventListener('scroll', onScroll)
   }, [])
 
   const navItems = (
@@ -157,6 +167,22 @@ export default function Sidebar() {
             {line}
           </div>
         ))}
+      </div>
+
+      {/* Scroll progress ruler */}
+      <div style={{ padding: '14px 10px 4px' }}>
+        <div style={{ position: 'relative', height: 10 }}>
+          {/* Track */}
+          <div style={{ position: 'absolute', top: '50%', transform: 'translateY(-50%)', left: 0, right: 0, height: 1, background: 'var(--muted)', opacity: 0.25 }} />
+          {/* Fill */}
+          <div style={{ position: 'absolute', top: '50%', transform: 'translateY(-50%)', left: 0, width: `${scrollProgress * 100}%`, height: 1, background: 'var(--muted)', transition: 'width 0.1s linear' }} />
+          {/* Left tick */}
+          <div style={{ position: 'absolute', left: 0, top: 0, bottom: 0, width: 1, background: 'var(--muted)', opacity: 0.4 }} />
+          {/* Mid tick */}
+          <div style={{ position: 'absolute', left: 'calc(50% - 0.5px)', top: '20%', bottom: '20%', width: 1, background: 'var(--muted)', opacity: 0.4 }} />
+          {/* Right tick */}
+          <div style={{ position: 'absolute', right: 0, top: 0, bottom: 0, width: 1, background: 'var(--muted)', opacity: 0.4 }} />
+        </div>
       </div>
 
       {/* Nav */}

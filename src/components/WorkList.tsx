@@ -215,7 +215,7 @@ export default function WorkList() {
         gap: isMobile ? 12 : 24,
       }}>
         {(isMobile ? mobileHeaders[lang] : headers[lang]).map(h => (
-          <span key={h} style={{ fontSize: 10, color: 'var(--muted)',  }}>{h}</span>
+          <span key={h} style={{ fontSize: 10, color: 'var(--muted)', letterSpacing: '0.08em' }}>{h}</span>
         ))}
       </div>
 

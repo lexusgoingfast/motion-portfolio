@@ -14,8 +14,9 @@ export default function ServicesSection() {
 
   return (
     <section ref={ref} id="services" style={{ borderBottom: '1px solid var(--border)' }}>
-      <div style={{ padding: `20px ${px}`, borderBottom: '1px solid var(--border)' }}>
-        <span style={{ fontSize: 10, color: 'var(--muted)',  }}>{tx.services_label}</span>
+      <div style={{ padding: `20px ${px}`, borderBottom: '1px solid var(--border)', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+        <span style={{ fontSize: 10, color: 'var(--muted)', letterSpacing: '0.08em' }}>{tx.services_label}</span>
+        <span style={{ fontSize: 10, color: 'var(--muted)', letterSpacing: '0.06em' }}>03</span>
       </div>
 
       {tx.services.map(([title, desc], i) => (
