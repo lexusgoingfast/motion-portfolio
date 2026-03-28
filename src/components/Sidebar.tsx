@@ -46,7 +46,6 @@ export default function Sidebar() {
             fontSize: 12,
             fontWeight: active === item ? 500 : 400,
             color: active === item ? 'var(--text)' : 'var(--muted)',
-            borderLeft: !isMobile && active === item ? `2px solid ${theme === 'dark' ? 'rgba(240,240,240,0.65)' : 'rgba(0,0,0,0.65)'}` : !isMobile ? '2px solid transparent' : 'none',
             cursor: 'none',
           }}
         >

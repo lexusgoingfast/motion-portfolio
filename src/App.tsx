@@ -1,9 +1,11 @@
+import { useState } from 'react'
 import './index.css'
 import { LangProvider } from './LangContext'
 import { ThemeProvider } from './ThemeContext'
 import Cursor from './components/Cursor'
 import Sidebar from './components/Sidebar'
 import Main from './components/Main'
+import Loader from './components/Loader'
 import { useIsMobile } from './useIsMobile'
 
 function Layout() {
@@ -22,9 +24,11 @@ function Layout() {
 }
 
 export default function App() {
+  const [loading, setLoading] = useState(true)
   return (
     <ThemeProvider>
       <LangProvider>
+        {loading && <Loader onDone={() => setLoading(false)} />}
         <Cursor />
         <Layout />
       </LangProvider>
