@@ -1,0 +1,50 @@
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+:root {
+  --bg: #FDFDFF;
+  --text: #181818;
+  --muted: rgba(24,24,24,0.4);
+  --border: rgba(24,24,24,0.1);
+  --hover: rgba(24,24,24,0.04);
+  --font: Arial, sans-serif;
+}
+
+:root[data-theme='dark'] {
+  --bg: #111111;
+  --text: #f0f0f0;
+  --muted: rgba(240,240,240,0.4);
+  --border: rgba(240,240,240,0.1);
+  --hover: rgba(240,240,240,0.04);
+}
+
+html { scroll-behavior: smooth; }
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--font);
+  overflow-x: hidden;
+  cursor: none;
+  font-size: 14px;
+  line-height: 1.7;
+  -webkit-font-smoothing: antialiased;
+  transition: background 0.3s, color 0.3s;
+}
+
+#root { width: 100%; min-height: 100vh; }
+
+::selection { background: rgba(128,128,128,0.2); }
+::-webkit-scrollbar { width: 3px; }
+::-webkit-scrollbar-track { background: var(--bg); }
+::-webkit-scrollbar-thumb { background: var(--muted); }
+
+a { text-decoration: none; color: inherit; }
+button { font-family: var(--font); }
+
+@media (max-width: 767px) {
+  body { cursor: auto; }
+}
