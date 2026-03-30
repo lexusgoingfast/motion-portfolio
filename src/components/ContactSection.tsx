@@ -150,8 +150,7 @@ export default function ContactSection() {
         fontSize: 10,
         color: 'rgba(0,0,0,0.22)',
       }}>
-        <span>portfolio © {new Date().getFullYear()}</span>
-        <span>built with motion</span>
+        <span>alexey maximovskikh © {new Date().getFullYear()}</span>
       </div>
     </section>
   )

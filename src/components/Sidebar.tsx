@@ -4,12 +4,13 @@ import { useLang } from '../LangContext'
 import { useTheme } from '../ThemeContext'
 import { t } from '../lang'
 
+
 export default function Sidebar() {
   const { lang, toggle } = useLang()
   const { theme, toggle: toggleTheme } = useTheme()
   const tx = t[lang]
   const [active, setActive] = useState(tx.nav[0])
-  const [infoOpen, setInfoOpen] = useState(false)
+  const [infoOpen, setInfoOpen] = useState(true)
   const [mobileOpen, setMobileOpen] = useState(false)
   const [isMobile, setIsMobile] = useState(window.innerWidth < 768)
   const [scrollProgress, setScrollProgress] = useState(0)
@@ -41,7 +42,6 @@ export default function Sidebar() {
           style={{
             display: 'flex',
             alignItems: 'center',
-            justifyContent: 'space-between',
             padding: isMobile ? '12px 24px' : '9px 24px 9px 10px',
             fontSize: 12,
             fontWeight: active === item ? 500 : 400,
@@ -157,7 +157,7 @@ export default function Sidebar() {
         {tx.name.split('\n').map((line, i) => (
           <div key={i} style={{
             fontSize: i === 0 ? 13 : 11,
-            fontWeight: i === 0 ? 600 : 400,
+            fontWeight: i === 0 ? 600 : 0,
             letterSpacing: i === 0 ? '-0.02em' : '0',
             lineHeight: i === 0 ? 1.3 : 1.6,
             color: i === 0 ? 'var(--text)' : 'var(--muted)',
@@ -171,15 +171,10 @@ export default function Sidebar() {
       {/* Scroll progress ruler */}
       <div style={{ padding: '14px 10px 4px' }}>
         <div style={{ position: 'relative', height: 10 }}>
-          {/* Track */}
           <div style={{ position: 'absolute', top: '50%', transform: 'translateY(-50%)', left: 0, right: 0, height: 1, background: 'var(--muted)', opacity: 0.25 }} />
-          {/* Fill */}
           <div style={{ position: 'absolute', top: '50%', transform: 'translateY(-50%)', left: 0, width: `${scrollProgress * 100}%`, height: 1, background: 'var(--muted)', transition: 'width 0.1s linear' }} />
-          {/* Left tick */}
           <div style={{ position: 'absolute', left: 0, top: 0, bottom: 0, width: 1, background: 'var(--muted)', opacity: 0.4 }} />
-          {/* Mid tick */}
           <div style={{ position: 'absolute', left: 'calc(50% - 0.5px)', top: '20%', bottom: '20%', width: 1, background: 'var(--muted)', opacity: 0.4 }} />
-          {/* Right tick */}
           <div style={{ position: 'absolute', right: 0, top: 0, bottom: 0, width: 1, background: 'var(--muted)', opacity: 0.4 }} />
         </div>
       </div>
