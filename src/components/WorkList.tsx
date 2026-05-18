@@ -5,7 +5,7 @@ import { useIsMobile } from '../useIsMobile'
 import { projects, getCasePagePath } from '../data/projects'
 import EnterButton from './EnterButton'
 
-const enterLabel = { en: 'Open', ru: 'открыть' }
+const enterLabel = { en: 'Open', ru: 'Открыть' }
 const sectionLabel = { en: 'Work', ru: 'Работы' }
 
 type WorkRowItem = {

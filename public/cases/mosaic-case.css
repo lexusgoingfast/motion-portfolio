@@ -28,7 +28,11 @@
 }
 
 .case__body.case__body--mosaic {
-  max-width: 1180px;
+  --mosaic-embed-w: calc(100vw - 96px);
+  --mosaic-hero-inner: calc(var(--mosaic-embed-w) - var(--s2));
+  --mosaic-desktop-w: calc(var(--mosaic-hero-inner) * 1.7726 / (1.7726 + 0.4599));
+  --mosaic-mobile-w: calc(var(--mosaic-hero-inner) * 0.4599 / (1.7726 + 0.4599));
+  max-width: var(--mosaic-embed-w);
   padding: var(--s3) var(--s3) var(--s4);
   container-type: inline-size;
 }
@@ -42,6 +46,96 @@
 .case__col {
   max-width: 720px;
   overflow: visible;
+}
+
+.case__col:has(.case__scope-layout) {
+  max-width: var(--mosaic-embed-w, calc(100vw - 96px));
+}
+
+.case__col:has(.case__scope-layout) > .case__section:not(:has(.case__scope-layout)) {
+  max-width: 720px;
+}
+
+.case__section:has(.case__scope-layout) {
+  width: 100%;
+  max-width: 100%;
+}
+
+.case__scope-layout {
+  --scope-mobile-w: var(--mosaic-mobile-w);
+  position: relative;
+  display: grid;
+  grid-template-columns: minmax(280px, 720px);
+  align-items: start;
+  width: var(--mosaic-embed-w);
+  max-width: var(--mosaic-embed-w);
+  margin-top: var(--s3);
+}
+
+.case__scope-stack {
+  min-width: 0;
+  max-width: 720px;
+  grid-column: 1;
+}
+
+.case__scope-aside {
+  position: absolute;
+  top: 0;
+  left: calc(var(--mosaic-desktop-w) - 2 * var(--scope-mobile-w) - var(--s2));
+  display: flex;
+  flex-direction: row;
+  gap: var(--s2);
+  flex: 0 0 auto;
+}
+
+.case__scope-aside .case__frame--mobile {
+  flex: 0 0 var(--scope-mobile-w);
+  width: var(--scope-mobile-w);
+  min-width: var(--scope-mobile-w);
+}
+
+.case__scope-aside .case__frame--mobile .case__frame-body--mobile {
+  width: 100%;
+  height: auto;
+  aspect-ratio: 402 / 874;
+  max-width: none;
+  flex: 0 0 auto;
+}
+
+@media (max-width: 1100px) {
+  .case__scope-layout {
+    position: static;
+    grid-template-columns: 1fr;
+    width: 100%;
+    max-width: 100%;
+  }
+
+  .case__scope-aside {
+    position: static;
+    left: auto;
+    flex-wrap: wrap;
+    width: 100%;
+  }
+
+  .case__scope-aside .case__frame--mobile {
+    flex: 1 1 220px;
+    width: auto;
+    min-width: 0;
+    max-width: var(--scope-mobile-w);
+  }
+
+  .case__scope-aside .case__frame--mobile .case__frame-body--mobile {
+    width: 100%;
+    height: auto;
+    aspect-ratio: 402 / 874;
+  }
+}
+
+@media (max-width: 560px) {
+  .case__scope-aside .case__frame--mobile {
+    flex: 1 1 100%;
+    max-width: var(--scope-mobile-w);
+  }
 }
 
 .case__col > .case__section:first-of-type {

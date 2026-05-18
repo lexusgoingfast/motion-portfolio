@@ -132,14 +132,40 @@ function tagsHtml(tags) {
 const labels = {
   ru: {
     htmlLang: 'ru',
-    back: '← К работам',
+    back: 'Назад',
+    backAria: 'Назад',
     langAria: 'Язык',
   },
   en: {
     htmlLang: 'en',
-    back: '← Back to work',
+    back: 'Back',
+    backAria: 'Back',
     langAria: 'Language',
   },
+}
+
+const BACK_ARROW_SVG =
+  '<svg class="enter-btn__arrow-svg" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 12H6M6 12L10 8M6 12L10 16"/></svg>'
+
+function backButtonHtml(locale) {
+  const l = labels[locale]
+  const text = locale === 'ru' ? bindRuTypography(l.back) : l.back
+  return `<a class="enter-btn enter-btn--back case__back" href="/#work" aria-label="${esc(l.backAria)}">
+          <span class="enter-btn__clip" aria-hidden="true">
+            <span class="enter-btn__surface"></span>
+            <span class="enter-btn__fill"></span>
+          </span>
+          <span class="enter-btn__content">
+            <span class="enter-btn__label">
+              <span class="enter-btn__arrow" aria-hidden="true">${BACK_ARROW_SVG}</span>
+              <span class="enter-btn__viewport">
+                <span class="enter-btn__text-track">
+                  <span class="enter-btn__text">${esc(text)}</span>
+                </span>
+              </span>
+            </span>
+          </span>
+        </a>`
 }
 
 function loc(data, locale) {
@@ -175,7 +201,7 @@ function page(p, locale) {
   <main class="case">
     <header class="case__header">
       <div class="case__header-top">
-        <a class="case__back" href="/#work">${esc(locale === 'ru' ? bindRuTypography(l.back) : l.back)}</a>
+        ${backButtonHtml(locale)}
         <nav class="case__lang-switch" aria-label="${esc(l.langAria)}">
           ${
             locale === 'ru'

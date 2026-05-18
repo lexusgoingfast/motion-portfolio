@@ -81,5 +81,26 @@ function initCursor() {
   requestAnimationFrame(tick)
 }
 
+function initEnterButtons() {
+  const buttons = document.querySelectorAll<HTMLAnchorElement>('.enter-btn')
+
+  buttons.forEach((btn) => {
+    const on = () => {
+      btn.setAttribute('data-hovered', '')
+      document.body.classList.add('enter-btn-hover')
+    }
+    const off = () => {
+      btn.removeAttribute('data-hovered')
+      document.body.classList.remove('enter-btn-hover')
+    }
+
+    btn.addEventListener('mouseenter', on)
+    btn.addEventListener('mouseleave', off)
+    btn.addEventListener('focus', on)
+    btn.addEventListener('blur', off)
+  })
+}
+
 initSmoothScroll()
 initCursor()
+initEnterButtons()

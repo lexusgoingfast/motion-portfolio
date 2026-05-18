@@ -544,5 +544,15 @@ function v() {
 	};
 	requestAnimationFrame(c);
 }
-g(), v();
+function y() {
+	document.querySelectorAll(".enter-btn").forEach((e) => {
+		let t = () => {
+			e.setAttribute("data-hovered", ""), document.body.classList.add("enter-btn-hover");
+		}, n = () => {
+			e.removeAttribute("data-hovered"), document.body.classList.remove("enter-btn-hover");
+		};
+		e.addEventListener("mouseenter", t), e.addEventListener("mouseleave", n), e.addEventListener("focus", t), e.addEventListener("blur", n);
+	});
+}
+g(), v(), y();
 //#endregion
