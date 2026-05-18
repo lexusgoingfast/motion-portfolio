@@ -76,11 +76,26 @@
           </figure>
           <figure class="case__frame case__frame--mobile">
             <div class="case__frame-bar">
-              <span class="case__frame-id">01 · Home</span>
+              <span class="case__frame-id">01 · Home · Mobile</span>
               <span class="case__frame-meta">402 × 874</span>
             </div>
             <div class="case__frame-body case__frame-body--mobile">
-              <div class="case__frame-void" role="presentation"></div>
+              <video
+                class="case__frame-video"
+                width="402"
+                height="874"
+                autoplay
+                muted
+                loop
+                playsinline
+                disablePictureInPicture
+                disableRemotePlayback
+                tabindex="-1"
+                aria-label="MOSAIC — главная страница, мобильная версия"
+                oncontextmenu="return false"
+              >
+                <source src="/cases/mosaic/01-home-mobile.mov" type="video/quicktime" />
+              </video>
             </div>
           </figure>
         </div>
@@ -314,8 +329,8 @@
       try {
         var mq = window.matchMedia('(prefers-reduced-motion: reduce)');
         function apply() {
-          var v = document.querySelector('.case__frame-video');
-          if (v) {
+          var videos = document.querySelectorAll('.case__frame-video');
+          videos.forEach(function (v) {
             if (mq.matches) {
               v.removeAttribute('autoplay');
               v.pause();
@@ -324,7 +339,7 @@
               var p = v.play();
               if (p && typeof p.catch === 'function') p.catch(function () {});
             }
-          }
+          });
         }
         apply();
         if (mq.addEventListener) mq.addEventListener('change', apply);
