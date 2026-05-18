@@ -5,7 +5,7 @@ export type Lang = 'en' | 'ru'
 const ru = {
   name: 'Алексей Максимовских',
   sidebar_tagline:
-    'мультидисциплинарный дизайнер с 4+ годами в ux/ui, art direction и визуальных системах.',
+    'product & ux/ui дизайнер · 4+ года · art direction, brand',
   nav: ['работы', 'обо мне', 'услуги', 'опыт', 'контакт'],
   info: 'инфо',
   available: 'открыт к проектам',
@@ -13,7 +13,7 @@ const ru = {
   email: 'a.maximovskikh@gmail.com',
   telegram: '@mxmvskh',
 
-  hero: 'мультидисциплинарный дизайнер, работающий на стыке art direction, ux/ui, визуальных систем и digital-опыта. создаю интерфейсы, визуальные концепции и бренд-ориентированные решения для продуктов, брендов и культурных проектов.',
+  hero: 'работаю с интерфейсами, визуальными системами и digital-опытом для продуктов, брендов и культурных проектов.',
 
   about_label: 'обо мне',
   about_title: 'я делаю цифровые и визуальные проекты, в которых важны не только логика и функция, но и ощущение.',
@@ -73,7 +73,7 @@ export const t = {
   en: {
     name: 'Alexey Maksimovskikh',
     sidebar_tagline:
-      'multidisciplinary designer with 4+ years in ux/ui, art direction and visual systems.',
+      'product & ux/ui designer · 4+ years · art direction, brand',
     nav: ['work', 'about', 'services', 'experience', 'contact'],
     info: 'info',
     available: 'available for work',
@@ -81,7 +81,7 @@ export const t = {
     email: 'a.maximovskikh@gmail.com',
     telegram: '@mxmvskh',
 
-    hero: 'multidisciplinary designer working across art direction, ux/ui, visual systems and digital experiences. i create interfaces, brand-led visuals and concept-driven design for products, brands and cultural projects.',
+    hero: 'i work with interfaces, visual systems and digital experiences for products, brands and cultural projects.',
 
     about_label: 'about',
     about_title: 'i make digital and visual projects where logic, function and feeling matter equally.',
