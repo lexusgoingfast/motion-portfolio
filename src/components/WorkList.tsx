@@ -5,7 +5,6 @@ import { useIsMobile } from '../useIsMobile'
 import { projects, getCasePagePath } from '../data/projects'
 
 const viewLabel = { en: 'View project →', ru: 'Открыть →' }
-const demoLabel = { en: 'Live demo →', ru: 'Демо →' }
 
 type WorkRowItem = {
   index: string
@@ -15,7 +14,6 @@ type WorkRowItem = {
   category: string
   desc: string
   tags: string[]
-  demoUrl?: string
 }
 
 function WorkRow({ work, i, lang }: { work: WorkRowItem; i: number; lang: 'en' | 'ru' }) {
@@ -94,7 +92,7 @@ function WorkRow({ work, i, lang }: { work: WorkRowItem; i: number; lang: 'en' |
               <p style={{ fontSize: 12, color: 'var(--muted)', lineHeight: 1.85, maxWidth: 500, marginBottom: 16 }}>
                 {work.desc}
               </p>
-              <div style={{ display: 'flex', gap: 6, flexWrap: 'wrap', marginBottom: work.demoUrl ? 12 : 0 }}>
+              <div style={{ display: 'flex', gap: 6, flexWrap: 'wrap' }}>
                 {work.tags.map(tag => (
                   <span key={tag} style={{
                     padding: '3px 9px',
@@ -108,25 +106,6 @@ function WorkRow({ work, i, lang }: { work: WorkRowItem; i: number; lang: 'en' |
                   </span>
                 ))}
               </div>
-              {work.demoUrl && (
-                <a
-                  href={work.demoUrl}
-                  target="_blank"
-                  rel="noreferrer"
-                  style={{
-                    display: 'inline-flex',
-                    alignItems: 'center',
-                    fontSize: 11,
-                    fontWeight: 500,
-                    color: 'var(--text)',
-                    borderBottom: '1px solid rgba(0,0,0,0.25)',
-                    paddingBottom: 1,
-                    cursor: 'none',
-                  }}
-                >
-                  {demoLabel[lang]}
-                </a>
-              )}
             </div>
           </motion.div>
         )}
@@ -146,7 +125,6 @@ export default function WorkList() {
     category: p[lang].category,
     desc: p[lang].desc,
     tags: p[lang].tags,
-    demoUrl: p.demoUrl,
   }))
   const headers = {
     en: ['#', 'title', 'type', 'year'],

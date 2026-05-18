@@ -20,7 +20,6 @@ export type ProjectLocale = {
 export type ProjectDef = {
   slug: ProjectSlug
   index: string
-  demoUrl?: string
   en: ProjectLocale
   ru: ProjectLocale
 }
@@ -29,7 +28,6 @@ export const projects: ProjectDef[] = [
   {
     slug: 'mosaic-concept-store',
     index: '01',
-    demoUrl: '/mosaic-animation/index.html',
     en: {
       title: 'MOSAIC — Concept Store',
       year: '2025 — present',
@@ -102,7 +100,6 @@ export const projects: ProjectDef[] = [
   {
     slug: 'kinetic-glitch-type',
     index: '05',
-    demoUrl: '/kinetic/typo-glitch/',
     en: {
       title: 'Kinetic Glitch Type',
       year: '2024',
@@ -121,7 +118,6 @@ export const projects: ProjectDef[] = [
   {
     slug: 'mosaic-logo-animation',
     index: '06',
-    demoUrl: '/mosaic-animation/index.html',
     en: {
       title: 'Mosaic Logo Animation',
       year: '2024',

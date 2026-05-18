@@ -9,7 +9,6 @@ const projects = [
   {
     slug: 'mosaic-concept-store',
     index: '01',
-    demoUrl: '/mosaic-animation/index.html',
     en: {
       title: 'MOSAIC — Concept Store',
       year: '2025 — present',
@@ -82,7 +81,6 @@ const projects = [
   {
     slug: 'kinetic-glitch-type',
     index: '05',
-    demoUrl: '/kinetic/typo-glitch/',
     en: {
       title: 'Kinetic Glitch Type',
       year: '2024',
@@ -101,7 +99,6 @@ const projects = [
   {
     slug: 'mosaic-logo-animation',
     index: '06',
-    demoUrl: '/mosaic-animation/index.html',
     en: {
       title: 'Mosaic Logo Animation',
       year: '2024',
@@ -135,13 +132,11 @@ const labels = {
   ru: {
     htmlLang: 'ru',
     back: '← К работам',
-    demo: 'Демо →',
     langAria: 'Язык',
   },
   en: {
     htmlLang: 'en',
     back: '← Back to work',
-    demo: 'Live demo →',
     langAria: 'Language',
   },
 }
@@ -153,10 +148,6 @@ function page(p, locale) {
   const selfPath = locale === 'ru' ? `${p.slug}.html` : `${p.slug}.en.html`
   const otherPath = other === 'ru' ? `${p.slug}.html` : `${p.slug}.en.html`
   const title = esc(data.title)
-  const demo =
-    p.demoUrl != null
-      ? `        <a class="case__demo" href="${esc(p.demoUrl)}" target="_blank" rel="noreferrer">${esc(l.demo)}</a>\n`
-      : ''
   return `<!DOCTYPE html>
 <html lang="${l.htmlLang}">
 <head>
@@ -199,7 +190,7 @@ function page(p, locale) {
         <div class="case__tags">
 ${tagsHtml(data.tags)}        </div>
       </section>
-${demo}    </div>
+    </div>
   </main>
 </body>
 </html>
