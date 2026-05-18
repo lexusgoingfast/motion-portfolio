@@ -36,97 +36,46 @@ function WorkRow({ work, i, lang }: { work: WorkRowItem; i: number; lang: 'en' |
       transition={{ duration: 0.4, delay: i * 0.06 }}
       style={{ borderBottom: '1px solid var(--border)' }}
     >
-      <div
+      <motion.div
+        role="button"
+        tabIndex={0}
+        aria-expanded={open}
+        aria-label={open ? (lang === 'ru' ? 'Свернуть кейс' : 'Collapse case') : (lang === 'ru' ? 'Развернуть кейс' : 'Expand case')}
+        className="work-row-toggle"
+        onClick={() => setOpen(!open)}
+        onKeyDown={(e) => {
+          if (e.key === 'Enter' || e.key === ' ') {
+            e.preventDefault()
+            setOpen(!open)
+          }
+        }}
         style={{
-          display: 'flex',
-          flexDirection: 'column',
-          gap: 'var(--gap-stack-sm)',
           padding: `${rowPadY} ${px}`,
           background: hovered ? 'var(--hover)' : 'transparent',
-          transition: 'background 0.15s',
         }}
         onMouseEnter={() => setHovered(true)}
         onMouseLeave={() => setHovered(false)}
       >
-        <motion.div
-          style={{
-            display: 'flex',
-            alignItems: 'flex-start',
-            justifyContent: 'space-between',
-            gap: 'var(--gap-stack-md)',
-          }}
-        >
-          <button
-            type="button"
-            onClick={() => setOpen(!open)}
-            style={{
-              flex: 1,
-              minWidth: 0,
-              padding: 0,
-              border: 'none',
-              background: 'transparent',
-              textAlign: 'left',
-              cursor: isMobile ? 'pointer' : 'none',
-              color: 'inherit',
-              font: 'inherit',
-            }}
+        <motion.div className="work-row-toggle__head">
+          <div className="work-row-toggle__main">
+            <span className="work-row-toggle__index">{work.index}</span>
+            <h3 className="work-row-toggle__title">{work.title}</h3>
+          </div>
+          <motion.span
+            className="work-row-toggle__icon"
+            animate={{ rotate: open ? 45 : 0 }}
+            transition={{ duration: 0.2 }}
+            aria-hidden
           >
-            <span
-              style={{
-                display: 'block',
-                fontSize: 10,
-                color: 'var(--muted)',
-                letterSpacing: '0.12em',
-                marginBottom: 10,
-              }}
-            >
-              {work.index}
-            </span>
-            <h3
-              style={{
-                fontSize: isMobile ? 15 : 17,
-                fontWeight: 500,
-                letterSpacing: '-0.02em',
-                lineHeight: 1.25,
-                color: 'var(--text)',
-              }}
-            >
-              {work.title}
-            </h3>
-          </button>
-
-          <button
-            type="button"
-            onClick={() => setOpen(!open)}
-            aria-expanded={open}
-            aria-label={open ? 'Collapse' : 'Expand'}
-            style={{
-              marginTop: 20,
-              padding: 0,
-              border: 'none',
-              background: 'transparent',
-              cursor: isMobile ? 'pointer' : 'none',
-              color: 'var(--muted)',
-              fontSize: 15,
-              lineHeight: 1,
-              flexShrink: 0,
-            }}
-          >
-            <motion.span
-              animate={{ rotate: open ? 45 : 0 }}
-              transition={{ duration: 0.2 }}
-              style={{ display: 'block' }}
-            >
-              +
-            </motion.span>
-          </button>
+            +
+          </motion.span>
         </motion.div>
 
         <div className="work-row-meta">
           <span className="work-row-meta__cat">{work.category}</span>
           <span className="work-row-meta__year">{work.year}</span>
         </div>
-      </div>
+      </motion.div>
 
       <AnimatePresence>
         {open && (
@@ -179,7 +128,11 @@ function WorkRow({ work, i, lang }: { work: WorkRowItem; i: number; lang: 'en' |
                 exit={{ opacity: 0, y: 4 }}
                 transition={{ duration: 0.35, delay: 0.08, ease: [0.16, 1, 0.3, 1] }}
               >
-                <EnterButton href={caseHref} label={enterLabel[lang]} />
+                <EnterButton
+                  href={caseHref}
+                  label={enterLabel[lang]}
+                  onClick={(e) => e.stopPropagation()}
+                />
               </motion.div>
             </motion.div>
           </motion.div>
