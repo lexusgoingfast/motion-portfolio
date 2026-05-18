@@ -5,7 +5,7 @@ export type Lang = 'en' | 'ru'
 const ru = {
   name: 'Алексей Максимовских',
   sidebar_tagline:
-    'product & ux/ui дизайнер · 4+ года ·\nart direction, brand',
+    'продакт-дизайнер и creative director\nсо стажем 4+ лет',
   nav: ['работы', 'обо мне', 'услуги', 'опыт', 'контакт'],
   info: 'инфо',
   available: 'открыт к проектам',
@@ -73,7 +73,7 @@ export const t = {
   en: {
     name: 'Alexey Maksimovskikh',
     sidebar_tagline:
-      'product & ux/ui designer · 4+ years ·\nart direction, brand',
+      'product designer and creative director\n4+ years of experience',
     nav: ['work', 'about', 'services', 'experience', 'contact'],
     info: 'info',
     available: 'available for work',

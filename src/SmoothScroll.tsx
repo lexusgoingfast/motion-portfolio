@@ -1,12 +1,10 @@
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 import { ReactLenis } from 'lenis/react'
 
 export default function SmoothScroll({ children }: { children: React.ReactNode }) {
-  const [enabled, setEnabled] = useState(false)
-
-  useEffect(() => {
-    setEnabled(!window.matchMedia('(prefers-reduced-motion: reduce)').matches)
-  }, [])
+  const [enabled] = useState(
+    () => !window.matchMedia('(prefers-reduced-motion: reduce)').matches,
+  )
 
   if (!enabled) return <>{children}</>
 
