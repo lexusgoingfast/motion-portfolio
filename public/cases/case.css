@@ -10,9 +10,16 @@
   --font: Arial, sans-serif;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  html { scroll-behavior: smooth; }
-}
+html { scroll-behavior: auto; }
+
+html.lenis,
+html.lenis body { height: auto; }
+
+.lenis.lenis-smooth { scroll-behavior: auto !important; }
+
+.lenis.lenis-stopped { overflow: hidden; }
+
+.lenis.lenis-scrolling iframe { pointer-events: none; }
 
 body {
   background: var(--bg);
@@ -22,6 +29,26 @@ body {
   line-height: 1.7;
   -webkit-font-smoothing: antialiased;
   min-height: 100vh;
+  overflow-x: hidden;
+}
+
+body.case-chrome-cursor {
+  cursor: none;
+}
+
+body.case-chrome-cursor a,
+body.case-chrome-cursor button {
+  cursor: none;
+}
+
+.case-cursor {
+  position: fixed;
+  top: 0;
+  left: 0;
+  pointer-events: none;
+  z-index: 9999;
+  mix-blend-mode: difference;
+  will-change: transform;
 }
 
 @media (max-width: 767px) {

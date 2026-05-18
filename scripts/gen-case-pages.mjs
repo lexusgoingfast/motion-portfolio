@@ -199,6 +199,7 @@ ${tagsHtml(data.tags)}        </div>
       </section>
     </div>
   </main>
+  <script type="module" src="./case-chrome.js"></script>
 </body>
 </html>
 `

@@ -5,7 +5,9 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "tsc -b && vite build",
+    "predev": "npm run build:case-chrome",
+    "build": "npm run build:case-chrome && tsc -b && vite build",
+    "build:case-chrome": "vite build --config vite.case-chrome.config.ts",
     "lint": "eslint .",
     "cases:gen": "node scripts/gen-case-pages.mjs",
     "preview": "vite preview"
