@@ -59,10 +59,6 @@
   grid-column: unset;
   margin-top: var(--s2);
   margin-bottom: var(--s2);
-  --embed-w: min(1180px, calc(100vw - var(--s3) * 2));
-  width: var(--embed-w);
-  max-width: var(--embed-w);
-  margin-right: calc(100% - var(--embed-w));
 }
 
 .case__screens {
@@ -79,7 +75,7 @@
   display: grid;
   grid-template-columns: minmax(0, 1fr) auto;
   column-gap: var(--s2);
-  align-items: start;
+  align-items: stretch;
 }
 
 .case__pair > .case__frame {
@@ -91,44 +87,21 @@
 
 .case__pair > .case__frame--desktop {
   min-width: 0;
-  align-self: start;
-}
-
-.case__pair > .case__frame--desktop .case__frame-body {
-  flex: 0 0 auto;
-  width: 100%;
 }
 
 .case__pair > .case__frame--mobile {
   flex-shrink: 0;
-  align-self: start;
 }
 
 .case__frame-body--mobile {
-  flex: 0 0 auto;
+  flex: 1 1 auto;
   aspect-ratio: 402 / 874;
-  width: clamp(132px, 14vw, 200px);
-  height: auto;
+  width: auto;
+  max-width: 100%;
+  height: 100%;
+  min-height: 0;
   margin-inline: auto;
   position: relative;
-  overflow: hidden;
-}
-
-.case__frame-body--mobile .case__frame-video {
-  position: absolute;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-}
-
-.case__pair--hero .case__frame--mobile .case__frame-body--mobile {
-  --mobile-w: clamp(132px, 14vw, 200px);
-  --desktop-w: calc(var(--embed-w) - var(--mobile-w) - var(--s2));
-  width: auto;
-  max-width: var(--mobile-w);
-  height: calc(var(--desktop-w) * 853 / 1512);
-  aspect-ratio: 402 / 874;
 }
 
 .case__cell--a { grid-column: 1 / span 8;  grid-row: 1; }
