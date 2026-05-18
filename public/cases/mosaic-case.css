@@ -453,7 +453,7 @@
   text-transform: uppercase;
   color: var(--muted);
   border: 1px solid var(--border);
-  border-radius: 2px;
+  border-radius: var(--radius-pill);
   padding: var(--s1) var(--s1);
 }
 

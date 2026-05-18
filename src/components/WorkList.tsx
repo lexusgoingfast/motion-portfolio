@@ -5,7 +5,7 @@ import { useIsMobile } from '../useIsMobile'
 import { projects, getCasePagePath } from '../data/projects'
 import EnterButton from './EnterButton'
 
-const enterLabel = { en: 'Enter', ru: 'Войти' }
+const enterLabel = { en: 'Open', ru: 'открыть' }
 const sectionLabel = { en: 'Work', ru: 'Работы' }
 
 type WorkRowItem = {
@@ -95,37 +95,31 @@ function WorkRow({ work, i, lang }: { work: WorkRowItem; i: number; lang: 'en' |
             </h3>
           </button>
 
-          <div style={{ display: 'flex', alignItems: 'flex-start', gap: 'var(--gap-stack-sm)' }}>
-            <button
-              type="button"
-              onClick={() => setOpen(!open)}
-              aria-expanded={open}
-              aria-label={open ? 'Collapse' : 'Expand'}
-              style={{
-                marginTop: 20,
-                padding: 0,
-                border: 'none',
-                background: 'transparent',
-                cursor: isMobile ? 'pointer' : 'none',
-                color: 'var(--muted)',
-                fontSize: 15,
-                lineHeight: 1,
-              }}
+          <button
+            type="button"
+            onClick={() => setOpen(!open)}
+            aria-expanded={open}
+            aria-label={open ? 'Collapse' : 'Expand'}
+            style={{
+              marginTop: 20,
+              padding: 0,
+              border: 'none',
+              background: 'transparent',
+              cursor: isMobile ? 'pointer' : 'none',
+              color: 'var(--muted)',
+              fontSize: 15,
+              lineHeight: 1,
+              flexShrink: 0,
+            }}
+          >
+            <motion.span
+              animate={{ rotate: open ? 45 : 0 }}
+              transition={{ duration: 0.2 }}
+              style={{ display: 'block' }}
             >
-              <motion.span
-                animate={{ rotate: open ? 45 : 0 }}
-                transition={{ duration: 0.2 }}
-                style={{ display: 'block' }}
-              >
-                +
-              </motion.span>
-            </button>
-            <EnterButton
-              href={caseHref}
-              label={enterLabel[lang]}
-              onClick={(e) => e.stopPropagation()}
-            />
-          </div>
+              +
+            </motion.span>
+          </button>
         </motion.div>
 
         <div
@@ -134,7 +128,6 @@ function WorkRow({ work, i, lang }: { work: WorkRowItem; i: number; lang: 'en' |
             flexWrap: 'wrap',
             alignItems: 'center',
             gap: 'var(--gap-stack-sm) var(--gap-stack-md)',
-            paddingRight: isMobile ? 0 : 88,
           }}
         >
           <span style={{ fontSize: 11, color: 'var(--muted)' }}>{work.category}</span>
@@ -164,14 +157,21 @@ function WorkRow({ work, i, lang }: { work: WorkRowItem; i: number; lang: 'en' |
               >
                 {work.desc}
               </p>
-              <div style={{ display: 'flex', gap: 'var(--gap-tags)', flexWrap: 'wrap' }}>
+              <div
+                style={{
+                  display: 'flex',
+                  gap: 'var(--gap-tags)',
+                  flexWrap: 'wrap',
+                  marginBottom: 'var(--gap-stack-md)',
+                }}
+              >
                 {work.tags.map(tag => (
                   <span
                     key={tag}
+                    className="chip"
                     style={{
                       padding: '5px 12px',
                       border: '1px solid var(--border)',
-                      borderRadius: 2,
                       fontSize: 10,
                       color: 'var(--muted)',
                       letterSpacing: '0.03em',
@@ -181,6 +181,14 @@ function WorkRow({ work, i, lang }: { work: WorkRowItem; i: number; lang: 'en' |
                   </span>
                 ))}
               </div>
+              <motion.div
+                initial={{ opacity: 0, y: 8 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: 4 }}
+                transition={{ duration: 0.35, delay: 0.08, ease: [0.16, 1, 0.3, 1] }}
+              >
+                <EnterButton href={caseHref} label={enterLabel[lang]} />
+              </motion.div>
             </motion.div>
           </motion.div>
         )}

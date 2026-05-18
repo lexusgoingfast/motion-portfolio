@@ -49,12 +49,12 @@ export default function AboutSection() {
               {tx.roles.map(role => (
                 <motion.span
                   key={role}
+                  className="chip"
                   whileHover={{ backgroundColor: theme === 'dark' ? '#f0f0f0' : '#181818', color: theme === 'dark' ? '#111111' : '#ffffff', borderColor: theme === 'dark' ? '#f0f0f0' : '#181818' }}
                   transition={{ duration: 0.15 }}
                   style={{
                     padding: '4px 10px',
                     border: '1px solid var(--border)',
-                    borderRadius: 2,
                     fontSize: 11,
                     color: 'var(--muted)',
                     cursor: 'none',

@@ -13,6 +13,7 @@ export default function Cursor() {
 
   return (
     <motion.div
+      className="case-cursor"
       style={{
         position: 'fixed',
         top: 0,

@@ -8,6 +8,7 @@
   --border: rgba(240, 240, 240, 0.1);
   --hover: rgba(240, 240, 240, 0.04);
   --font: Arial, sans-serif;
+  --radius-pill: 999px;
 }
 
 html { scroll-behavior: auto; }
@@ -181,7 +182,7 @@ a {
 .case__tag {
   padding: 4px 10px;
   border: 1px solid var(--border);
-  border-radius: 2px;
+  border-radius: var(--radius-pill);
   font-size: 10px;
   color: var(--muted);
   letter-spacing: 0.03em;
