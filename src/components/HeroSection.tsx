@@ -38,7 +38,7 @@ export default function HeroSection() {
           color: 'var(--text)',
         }}
       >
-        {tx.hero.split(' ').map((word, i) => (
+        {tx.hero.split(/ +/).map((word, i) => (
           <span key={`${lang}-${i}`}>
             <span data-word style={{ display: 'inline', opacity: 0 }}>{word}</span>
             {' '}

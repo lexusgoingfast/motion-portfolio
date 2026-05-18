@@ -1,3 +1,5 @@
+import { applyRuTypographyDeep } from '../typography'
+
 export const PROJECT_SLUGS = [
   'mosaic-concept-store',
   'ux-ui-ibls',
@@ -24,7 +26,7 @@ export type ProjectDef = {
   ru: ProjectLocale
 }
 
-export const projects: ProjectDef[] = [
+const rawProjects: ProjectDef[] = [
   {
     slug: 'mosaic-concept-store',
     index: '01',
@@ -134,6 +136,11 @@ export const projects: ProjectDef[] = [
     },
   },
 ]
+
+export const projects: ProjectDef[] = rawProjects.map(p => ({
+  ...p,
+  ru: applyRuTypographyDeep(p.ru),
+}))
 
 export function getProjectBySlug(slug: string): ProjectDef | undefined {
   return projects.find(p => p.slug === slug)

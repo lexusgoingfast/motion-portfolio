@@ -4,6 +4,7 @@ import { motion, AnimatePresence } from 'motion/react'
 import { useLang } from '../LangContext'
 import { useTheme } from '../ThemeContext'
 import { t } from '../lang'
+import { useScrollProgress } from '../useScrollProgress'
 
 
 export default function Sidebar() {
@@ -14,22 +15,13 @@ export default function Sidebar() {
   const [infoOpen, setInfoOpen] = useState(true)
   const [mobileOpen, setMobileOpen] = useState(false)
   const [isMobile, setIsMobile] = useState(window.innerWidth < 768)
-  const [scrollProgress, setScrollProgress] = useState(0)
+  const scrollProgress = useScrollProgress()
   const [hoveredNav, setHoveredNav] = useState<number | null>(null)
 
   useEffect(() => {
     const onResize = () => setIsMobile(window.innerWidth < 768)
     window.addEventListener('resize', onResize)
     return () => window.removeEventListener('resize', onResize)
-  }, [])
-
-  useEffect(() => {
-    const onScroll = () => {
-      const max = document.documentElement.scrollHeight - window.innerHeight
-      setScrollProgress(max > 0 ? window.scrollY / max : 0)
-    }
-    window.addEventListener('scroll', onScroll, { passive: true })
-    return () => window.removeEventListener('scroll', onScroll)
   }, [])
 
   const navItems = isMobile ? (

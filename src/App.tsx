@@ -7,6 +7,7 @@ import Sidebar from './components/Sidebar'
 import Main from './components/Main'
 import LegacyWorkRedirect from './pages/LegacyWorkRedirect'
 import ScrollToSection from './ScrollToSection'
+import SmoothScroll from './SmoothScroll'
 import { useIsMobile } from './useIsMobile'
 
 function Shell({ children }: { children: React.ReactNode }) {
@@ -28,13 +29,15 @@ export default function App() {
   return (
     <ThemeProvider>
       <LangProvider>
-        <Cursor />
-        <ScrollToSection />
-        <Routes>
-          <Route path="/" element={<Shell><Main /></Shell>} />
-          <Route path="/work/:slug" element={<Shell><LegacyWorkRedirect /></Shell>} />
-          <Route path="*" element={<Navigate to="/" replace />} />
-        </Routes>
+        <SmoothScroll>
+          <Cursor />
+          <ScrollToSection />
+          <Routes>
+            <Route path="/" element={<Shell><Main /></Shell>} />
+            <Route path="/work/:slug" element={<Shell><LegacyWorkRedirect /></Shell>} />
+            <Route path="*" element={<Navigate to="/" replace />} />
+          </Routes>
+        </SmoothScroll>
       </LangProvider>
     </ThemeProvider>
   )

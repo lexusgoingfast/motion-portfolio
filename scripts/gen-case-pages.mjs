@@ -1,6 +1,7 @@
 import fs from 'node:fs'
 import path from 'node:path'
 import { fileURLToPath } from 'node:url'
+import { bindRuTypography, bindRuTypographyHtml } from '../shared/ru-typography.js'
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url))
 const outDir = path.join(__dirname, '..', 'public', 'cases')
@@ -141,8 +142,17 @@ const labels = {
   },
 }
 
+function loc(data, locale) {
+  if (locale !== 'ru') return data
+  return {
+    ...data,
+    category: bindRuTypography(data.category),
+    desc: bindRuTypography(data.desc),
+  }
+}
+
 function page(p, locale) {
-  const data = p[locale]
+  const data = loc(p[locale], locale)
   const other = locale === 'ru' ? 'en' : 'ru'
   const l = labels[locale]
   const selfPath = locale === 'ru' ? `${p.slug}.html` : `${p.slug}.en.html`
@@ -165,7 +175,7 @@ function page(p, locale) {
   <main class="case">
     <header class="case__header">
       <div class="case__header-top">
-        <a class="case__back" href="/#work">${esc(l.back)}</a>
+        <a class="case__back" href="/#work">${esc(locale === 'ru' ? bindRuTypography(l.back) : l.back)}</a>
         <nav class="case__lang-switch" aria-label="${esc(l.langAria)}">
           ${
             locale === 'ru'
@@ -204,7 +214,15 @@ for (const p of projects) {
   for (const locale of ['ru', 'en']) {
     const filename = locale === 'ru' ? `${p.slug}.html` : `${p.slug}.en.html`
     const fp = path.join(outDir, filename)
-    fs.writeFileSync(fp, page(p, locale), 'utf8')
+    let html = page(p, locale)
+    if (locale === 'ru') html = bindRuTypographyHtml(html)
+    fs.writeFileSync(fp, html, 'utf8')
     console.log('wrote', path.relative(path.join(__dirname, '..'), fp))
   }
+}
+
+for (const slug of handBuiltSlugs) {
+  const fp = path.join(outDir, `${slug}.html`)
+  fs.writeFileSync(fp, bindRuTypographyHtml(fs.readFileSync(fp, 'utf8')), 'utf8')
+  console.log('typo', path.relative(path.join(__dirname, '..'), fp))
 }
