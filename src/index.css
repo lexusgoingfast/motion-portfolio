@@ -283,6 +283,30 @@ body.enter-btn-hover .case-cursor {
   border-radius: var(--radius-pill);
 }
 
+.work-row-meta {
+  display: inline-flex;
+  align-items: baseline;
+  max-width: 100%;
+  white-space: nowrap;
+}
+
+.work-row-meta__cat,
+.work-row-meta__year {
+  font-size: 11px;
+  line-height: 1.4;
+  color: var(--muted);
+}
+
+.work-row-meta__year {
+  font-variant-numeric: tabular-nums;
+}
+
+.work-row-meta__year::before {
+  content: '·';
+  margin: 0 0.38em;
+  opacity: 0.5;
+}
+
 .enter-btn__text {
   display: block;
 }

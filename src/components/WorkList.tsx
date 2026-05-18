@@ -122,17 +122,9 @@ function WorkRow({ work, i, lang }: { work: WorkRowItem; i: number; lang: 'en' |
           </button>
         </motion.div>
 
-        <div
-          style={{
-            display: 'flex',
-            flexWrap: 'wrap',
-            alignItems: 'center',
-            gap: 'var(--gap-stack-sm) var(--gap-stack-md)',
-          }}
-        >
-          <span style={{ fontSize: 11, color: 'var(--muted)' }}>{work.category}</span>
-          <span style={{ fontSize: 11, color: 'var(--muted)', opacity: 0.5 }}>·</span>
-          <span style={{ fontSize: 11, color: 'var(--muted)' }}>{work.year}</span>
+        <div className="work-row-meta">
+          <span className="work-row-meta__cat">{work.category}</span>
+          <span className="work-row-meta__year">{work.year}</span>
         </div>
       </div>
 
