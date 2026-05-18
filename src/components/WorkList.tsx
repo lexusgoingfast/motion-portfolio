@@ -24,6 +24,7 @@ function WorkRow({ work, i, lang }: { work: WorkRowItem; i: number; lang: 'en' |
   const isMobile = useIsMobile()
   const px = isMobile ? '20px' : '40px'
   const caseHref = getCasePagePath(work.slug)
+  const desktopCols = '32px minmax(0,1fr) 180px 110px 70px 14px'
 
   return (
     <motion.div
@@ -39,8 +40,8 @@ function WorkRow({ work, i, lang }: { work: WorkRowItem; i: number; lang: 'en' |
         onMouseLeave={() => setHovered(false)}
         style={{
           display: 'grid',
-          gridTemplateColumns: isMobile ? '1fr auto' : '40px 1fr auto auto',
-          gap: isMobile ? 12 : 24,
+          gridTemplateColumns: isMobile ? '1fr auto' : desktopCols,
+          columnGap: isMobile ? 12 : 20,
           alignItems: 'center',
           padding: `22px ${px}`,
           cursor: 'none',
@@ -49,9 +50,11 @@ function WorkRow({ work, i, lang }: { work: WorkRowItem; i: number; lang: 'en' |
         }}
       >
         {!isMobile && <span style={{ fontSize: 10, color: 'var(--muted)' }}>{work.index}</span>}
-        <span style={{ fontSize: 13, fontWeight: 500, letterSpacing: '-0.01em' }}>{work.title}</span>
-        {!isMobile && <span style={{ fontSize: 11, color: 'var(--muted)', whiteSpace: 'nowrap' }}>{work.category}</span>}
-        <div style={{ display: 'flex', alignItems: 'center', gap: 14 }}>
+        <span style={{ fontSize: 13, fontWeight: 500, letterSpacing: '-0.01em', minWidth: 0, overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>{work.title}</span>
+        {!isMobile && (
+          <span style={{ fontSize: 11, color: 'var(--muted)', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>{work.category}</span>
+        )}
+        {!isMobile && (
           <a
             href={caseHref}
             onClick={(e) => e.stopPropagation()}
@@ -59,24 +62,41 @@ function WorkRow({ work, i, lang }: { work: WorkRowItem; i: number; lang: 'en' |
               fontSize: 11,
               fontWeight: 500,
               color: 'var(--text)',
-              borderBottom: '1px solid rgba(0,0,0,0.25)',
+              borderBottom: '1px solid var(--border)',
               paddingBottom: 1,
               lineHeight: 1.2,
               textDecoration: 'none',
               cursor: 'none',
+              justifySelf: 'start',
+              whiteSpace: 'nowrap',
             }}
           >
             {viewLabel[lang]}
           </a>
-          <span style={{ fontSize: 11, color: 'var(--muted)' }}>{work.year}</span>
+        )}
+        {!isMobile && (
+          <span style={{ fontSize: 11, color: 'var(--muted)', justifySelf: 'end', whiteSpace: 'nowrap' }}>{work.year}</span>
+        )}
+        {isMobile ? (
+          <div style={{ display: 'flex', alignItems: 'center', gap: 12 }}>
+            <span style={{ fontSize: 11, color: 'var(--muted)' }}>{work.year}</span>
+            <motion.span
+              animate={{ rotate: open ? 45 : 0 }}
+              transition={{ duration: 0.2 }}
+              style={{ fontSize: 15, color: 'var(--muted)', lineHeight: 1 }}
+            >
+              +
+            </motion.span>
+          </div>
+        ) : (
           <motion.span
             animate={{ rotate: open ? 45 : 0 }}
             transition={{ duration: 0.2 }}
-            style={{ fontSize: 15, color: 'var(--muted)', lineHeight: 1 }}
+            style={{ fontSize: 15, color: 'var(--muted)', lineHeight: 1, justifySelf: 'end' }}
           >
             +
           </motion.span>
-        </div>
+        )}
       </div>
 
       <AnimatePresence>
@@ -126,9 +146,10 @@ export default function WorkList() {
     desc: p[lang].desc,
     tags: p[lang].tags,
   }))
+  const desktopCols = '32px minmax(0,1fr) 180px 110px 70px 14px'
   const headers = {
-    en: ['#', 'title', 'type', 'year'],
-    ru: ['#', 'название', 'тип', 'год'],
+    en: ['#', 'title', 'type', '', 'year', ''],
+    ru: ['#', 'название', 'тип', '', 'год', ''],
   }
   const mobileHeaders = { en: ['title', 'year'], ru: ['название', 'год'] }
 
@@ -138,11 +159,22 @@ export default function WorkList() {
         padding: isMobile ? '20px 24px' : '20px 48px',
         borderBottom: '1px solid var(--border)',
         display: 'grid',
-        gridTemplateColumns: isMobile ? '1fr auto' : '40px 1fr auto auto',
-        gap: isMobile ? 12 : 24,
+        gridTemplateColumns: isMobile ? '1fr auto' : desktopCols,
+        columnGap: isMobile ? 12 : 20,
       }}>
-        {(isMobile ? mobileHeaders[lang] : headers[lang]).map(h => (
-          <span key={h} style={{ fontSize: 10, color: 'var(--muted)', letterSpacing: '0.08em' }}>{h}</span>
+        {(isMobile ? mobileHeaders[lang] : headers[lang]).map((h, idx) => (
+          <span
+            key={`${h}-${idx}`}
+            style={{
+              fontSize: 10,
+              color: 'var(--muted)',
+              letterSpacing: '0.08em',
+              textTransform: 'lowercase',
+              justifySelf: !isMobile && idx === 4 ? 'end' : 'start',
+            }}
+          >
+            {h}
+          </span>
         ))}
       </div>
 

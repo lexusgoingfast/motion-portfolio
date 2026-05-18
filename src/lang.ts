@@ -3,7 +3,9 @@ import { applyRuTypographyDeep } from './typography'
 export type Lang = 'en' | 'ru'
 
 const ru = {
-  name: 'Алексей Максимовских\nмультидисциплинарный дизайнер\n& creative director',
+  name: 'Алексей Максимовских',
+  sidebar_tagline:
+    'продуктовый и мультидисциплинарный дизайнер с 4+ годами в ux/ui, art direction и визуальных системах.',
   nav: ['работы', 'обо мне', 'услуги', 'опыт', 'контакт'],
   info: 'инфо',
   available: 'открыт к проектам',
@@ -69,7 +71,9 @@ const ru = {
 
 export const t = {
   en: {
-    name: 'Alexey Maksimovskikh\nmultidisciplinary designer\n& creative director',
+    name: 'Alexey Maksimovskikh',
+    sidebar_tagline:
+      'product-focused multidisciplinary designer with 4+ years in ux/ui, art direction and visual systems.',
     nav: ['work', 'about', 'services', 'experience', 'contact'],
     info: 'info',
     available: 'available for work',

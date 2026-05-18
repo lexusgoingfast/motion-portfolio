@@ -202,18 +202,24 @@ export default function Sidebar() {
 
       {/* Name */}
       <div style={{ padding: '20px 10px 0' }}>
-        {tx.name.split('\n').map((line, i) => (
-          <div key={i} style={{
-            fontSize: i === 0 ? 13 : 11,
-            fontWeight: i === 0 ? 600 : 0,
-            letterSpacing: i === 0 ? '-0.02em' : '0',
-            lineHeight: i === 0 ? 1.3 : 1.6,
-            color: i === 0 ? 'var(--text)' : 'var(--muted)',
-            marginTop: i === 1 ? 6 : 0,
-          }}>
-            {line}
-          </div>
-        ))}
+        <motion.div style={{
+          fontSize: 13,
+          fontWeight: 600,
+          letterSpacing: '-0.02em',
+          lineHeight: 1.3,
+          color: 'var(--text)',
+        }}>
+          {tx.name.split('\n')[0]}
+        </motion.div>
+        <p style={{
+          marginTop: 10,
+          fontSize: 11,
+          lineHeight: 1.65,
+          color: 'var(--muted)',
+          maxWidth: 220,
+        }}>
+          {tx.sidebar_tagline}
+        </p>
       </div>
 
       {/* Scroll progress ruler */}
