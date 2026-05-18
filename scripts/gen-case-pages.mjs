@@ -149,7 +149,7 @@ function page(p, locale) {
   const otherPath = other === 'ru' ? `${p.slug}.html` : `${p.slug}.en.html`
   const title = esc(data.title)
   return `<!DOCTYPE html>
-<html lang="${l.htmlLang}">
+<html lang="${l.htmlLang}" data-theme="dark">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -158,10 +158,7 @@ function page(p, locale) {
   <link rel="alternate" hreflang="en" href="/cases/${p.slug}.en.html" />
   <link rel="stylesheet" href="./case.css" />
   <script>
-    try {
-      if (window.matchMedia('(prefers-color-scheme: dark)').matches)
-        document.documentElement.setAttribute('data-theme', 'dark');
-    } catch (e) {}
+    try { document.documentElement.setAttribute('data-theme', 'dark'); } catch (e) {}
   </script>
 </head>
 <body>

@@ -1,33 +1,18 @@
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
-:root {
-  --bg: #fdfdff;
-  --text: #181818;
-  --muted: rgba(24, 24, 24, 0.4);
-  --border: rgba(24, 24, 24, 0.1);
-  --hover: rgba(24, 24, 24, 0.04);
-  --font: Arial, sans-serif;
-}
-
+:root,
 :root[data-theme='dark'] {
   --bg: #111111;
   --text: #f0f0f0;
   --muted: rgba(240, 240, 240, 0.4);
   --border: rgba(240, 240, 240, 0.1);
   --hover: rgba(240, 240, 240, 0.04);
+  --font: Arial, sans-serif;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root:not([data-theme='light']) {
-    --bg: #111111;
-    --text: #f0f0f0;
-    --muted: rgba(240, 240, 240, 0.4);
-    --border: rgba(240, 240, 240, 0.1);
-    --hover: rgba(240, 240, 240, 0.04);
-  }
+@media (prefers-reduced-motion: no-preference) {
+  html { scroll-behavior: smooth; }
 }
-
-html { scroll-behavior: smooth; }
 
 body {
   background: var(--bg);
