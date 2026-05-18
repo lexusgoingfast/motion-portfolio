@@ -15,6 +15,7 @@ export default function Sidebar() {
   const [mobileOpen, setMobileOpen] = useState(false)
   const [isMobile, setIsMobile] = useState(window.innerWidth < 768)
   const [scrollProgress, setScrollProgress] = useState(0)
+  const [hoveredNav, setHoveredNav] = useState<number | null>(null)
 
   useEffect(() => {
     const onResize = () => setIsMobile(window.innerWidth < 768)
@@ -31,33 +32,83 @@ export default function Sidebar() {
     return () => window.removeEventListener('scroll', onScroll)
   }, [])
 
-  const navItems = (
+  const navItems = isMobile ? (
     <>
       {tx.nav.map((item, i) => {
         const section = t.en.nav[i].toLowerCase().replace(/\s/g, '-')
+        const inverted = hoveredNav === i
         return (
           <Link
             key={item}
             to="/"
             state={{ section }}
             onClick={() => { setActive(item); setMobileOpen(false) }}
-            className="sidebar-nav"
-            style={{
-              display: 'flex',
-              alignItems: 'center',
-              padding: isMobile ? '12px 24px' : '9px 24px 9px 10px',
-              fontSize: 12,
-              fontWeight: active === item ? 500 : 400,
-              color: active === item ? 'var(--text)' : 'var(--muted)',
-              cursor: 'none',
-              transition: 'background-color 0.15s, color 0.15s',
-            }}
+            onMouseEnter={() => setHoveredNav(i)}
+            onMouseLeave={() => setHoveredNav(null)}
+            className={[
+              'sidebar-nav-row',
+              inverted ? 'sidebar-nav-row--inverted' : '',
+              active === item ? 'sidebar-nav-row--active' : '',
+            ].filter(Boolean).join(' ')}
+            style={{ gridTemplateColumns: '1fr', cursor: 'none' }}
           >
-            {item}
+            {inverted && (
+              <motion.div
+                layoutId="sidebar-nav-highlight"
+                className="sidebar-nav-highlight"
+                transition={{ duration: 0.15, ease: 'easeOut' }}
+              />
+            )}
+            <span
+              className="sidebar-nav-label"
+              style={{ color: inverted ? undefined : active === item ? 'var(--text)' : 'var(--muted)', fontWeight: active === item ? 500 : 400 }}
+            >
+              {item}
+            </span>
           </Link>
         )
       })}
     </>
+  ) : (
+    <motion.nav
+      className="sidebar-nav-list"
+      onMouseLeave={() => setHoveredNav(null)}
+    >
+      {tx.nav.map((item, i) => {
+        const section = t.en.nav[i].toLowerCase().replace(/\s/g, '-')
+        const inverted = hoveredNav === i
+        return (
+          <Link
+            key={item}
+            to="/"
+            state={{ section }}
+            onClick={() => { setActive(item); setMobileOpen(false) }}
+            onMouseEnter={() => setHoveredNav(i)}
+            className={[
+              'sidebar-nav-row',
+              inverted ? 'sidebar-nav-row--inverted' : '',
+              active === item ? 'sidebar-nav-row--active' : '',
+            ].filter(Boolean).join(' ')}
+            style={{ cursor: 'none' }}
+          >
+            {inverted && (
+              <motion.div
+                layoutId="sidebar-nav-highlight"
+                className="sidebar-nav-highlight"
+                transition={{ duration: 0.15, ease: 'easeOut' }}
+              />
+            )}
+            <span
+              className="sidebar-nav-label"
+              style={{ color: inverted ? undefined : active === item ? undefined : 'var(--muted)', fontWeight: active === item ? 500 : 400 }}
+            >
+              {item}
+            </span>
+            <span className="sidebar-nav-num">{String(i + 1).padStart(2, '0')}</span>
+          </Link>
+        )
+      })}
+    </motion.nav>
   )
 
   /* ── MOBILE ── */
@@ -132,7 +183,7 @@ export default function Sidebar() {
                 borderBottom: '1px solid var(--border)',
               }}
             >
-              <nav>{navItems}</nav>
+              <nav className="sidebar-nav-list">{navItems}</nav>
             </motion.div>
           )}
         </AnimatePresence>
@@ -185,7 +236,7 @@ export default function Sidebar() {
       </div>
 
       {/* Nav */}
-      <nav style={{ padding: 0, flex: 1 }}>{navItems}</nav>
+      <motion.div style={{ flex: 1 }}>{navItems}</motion.div>
 
       {/* Bottom */}
       <div style={{ padding: '0 10px' }}>
