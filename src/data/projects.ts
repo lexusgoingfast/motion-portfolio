@@ -13,6 +13,7 @@ export type ProjectSlug = (typeof PROJECT_SLUGS)[number]
 
 export type ProjectLocale = {
   title: string
+  shortTitle: string
   year: string
   category: string
   desc: string
@@ -32,6 +33,7 @@ const rawProjects: ProjectDef[] = [
     index: '01',
     en: {
       title: 'MOSAIC — Concept Store',
+      shortTitle: 'Mosaic',
       year: '2025 — present',
       category: 'Brand / Retail',
       desc: 'Art direction & full digital product design for a multi-brand concept store: visual identity, working interactive prototype, Figma design system on Variables (tokens · type · spacing · components with States & Variants), and AI-powered campaign concepts.',
@@ -39,6 +41,7 @@ const rawProjects: ProjectDef[] = [
     },
     ru: {
       title: 'MOSAIC — Concept Store',
+      shortTitle: 'Mosaic',
       year: '2025 — наст. время',
       category: 'Бренд / Ритейл',
       desc: 'Арт-дирекшн и полноценный продуктовый дизайн концепт-стора: айдентика, рабочий интерактивный прототип, дизайн-система в Figma на Variables (токены · типографика · spacing · компоненты со States и Variants) и AI-кампейны.',
@@ -50,6 +53,7 @@ const rawProjects: ProjectDef[] = [
     index: '02',
     en: {
       title: 'UX/UI — IBLS',
+      shortTitle: 'UX/UI',
       year: '2022–2024',
       category: 'Interfaces / Product',
       desc: 'Full-cycle UX/UI design for digital product: user research, information architecture, wireframes, UI components, and prototype delivery.',
@@ -57,6 +61,7 @@ const rawProjects: ProjectDef[] = [
     },
     ru: {
       title: 'UX/UI — IBLS',
+      shortTitle: 'UX/UI',
       year: '2022–2024',
       category: 'Интерфейсы / Продукт',
       desc: 'Полный цикл UX/UI дизайна для цифрового продукта: ресерч, информационная архитектура, вайрфреймы, UI-компоненты, прототипы.',
@@ -68,6 +73,7 @@ const rawProjects: ProjectDef[] = [
     index: '03',
     en: {
       title: 'Visual & Digital — ПИК',
+      shortTitle: 'Visual',
       year: '2024–2026',
       category: 'Brand / Digital',
       desc: 'Visual digital communications, AI-driven visual production, UX/UI for internal products, and presentation design for one of Russia\'s largest real estate developers.',
@@ -75,6 +81,7 @@ const rawProjects: ProjectDef[] = [
     },
     ru: {
       title: 'Visual & Digital — ПИК',
+      shortTitle: 'Visual',
       year: '2024–2026',
       category: 'Бренд / Digital',
       desc: 'Визуальные digital-коммуникации, AI-визуал, UX/UI для внутренних продуктов и презентации для одного из крупнейших девелоперов России.',
@@ -86,6 +93,7 @@ const rawProjects: ProjectDef[] = [
     index: '04',
     en: {
       title: 'AI Visual — Tape Production',
+      shortTitle: 'AI Visual',
       year: '2026',
       category: 'AI / Content',
       desc: 'AI-assisted visual production pipeline, YouTube thumbnail design, and video content direction.',
@@ -93,6 +101,7 @@ const rawProjects: ProjectDef[] = [
     },
     ru: {
       title: 'AI Visual — Tape Production',
+      shortTitle: 'AI Visual',
       year: '2026',
       category: 'AI / Контент',
       desc: 'AI-пайплайн для визуального производства, дизайн YouTube-превью, арт-дирекшн видеоконтента.',
@@ -104,6 +113,7 @@ const rawProjects: ProjectDef[] = [
     index: '05',
     en: {
       title: 'Kinetic Glitch Type',
+      shortTitle: 'Kinetic',
       year: '2024',
       category: 'Motion / Experiment',
       desc: 'Real-time dot-matrix typography renderer with procedural glitch displacement. Configurable dot size, gap, colours, and glitch strength.',
@@ -111,6 +121,7 @@ const rawProjects: ProjectDef[] = [
     },
     ru: {
       title: 'Kinetic Glitch Type',
+      shortTitle: 'Kinetic',
       year: '2024',
       category: 'Моушн / Эксперимент',
       desc: 'Рендерер точечной типографики в реальном времени с процедуральным глич-смещением. Настраиваемые размер точек, отступы, цвета и сила глича.',
@@ -122,6 +133,7 @@ const rawProjects: ProjectDef[] = [
     index: '06',
     en: {
       title: 'Mosaic Logo Animation',
+      shortTitle: 'Mosaic',
       year: '2024',
       category: 'Motion / Experiment',
       desc: 'Canvas engine scattering and reassembling a logo from thousands of colour-matched particles with configurable easing and phase timing.',
@@ -129,6 +141,7 @@ const rawProjects: ProjectDef[] = [
     },
     ru: {
       title: 'Mosaic Logo Animation',
+      shortTitle: 'Mosaic',
       year: '2024',
       category: 'Моушн / Эксперимент',
       desc: 'Canvas-движок, рассыпающий и собирающий логотип из тысяч частиц с настройкой easing и фазовым тайммингом.',
