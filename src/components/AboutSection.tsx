@@ -12,8 +12,8 @@ export default function AboutSection() {
   const ref = useRef<HTMLElement>(null)
   const inView = useInView(ref, { once: true, margin: '-60px' })
   const isMobile = useIsMobile()
-  const p = isMobile ? '40px 24px' : '80px 48px'
-  const lp = isMobile ? '20px 24px' : '20px 48px'
+  const p = isMobile ? '48px var(--pad-x-mobile)' : '88px var(--pad-x)'
+  const lp = isMobile ? 'var(--pad-section-y-mobile) var(--pad-x-mobile)' : 'var(--pad-section-y) var(--pad-x)'
 
   return (
     <section ref={ref} id="about" style={{ borderBottom: '1px solid var(--border)' }}>
@@ -26,7 +26,7 @@ export default function AboutSection() {
         padding: p,
         display: 'grid',
         gridTemplateColumns: isMobile ? '1fr' : '1fr 1fr',
-        gap: isMobile ? 32 : 64,
+        gap: isMobile ? 40 : 72,
         alignItems: 'start',
       }}>
         <motion.div
@@ -34,18 +34,18 @@ export default function AboutSection() {
           animate={inView ? { opacity: 1 } : {}}
           transition={{ duration: 0.6 }}
         >
-          <p style={{ fontSize: 17, fontWeight: 400, letterSpacing: '-0.02em', lineHeight: 1.55, marginBottom: 28 }}>
+          <p style={{ fontSize: 17, fontWeight: 400, letterSpacing: '-0.02em', lineHeight: 1.55, marginBottom: 'var(--gap-stack-md)' }}>
             {tx.about_title}
           </p>
           <p style={{ fontSize: 12, color: 'var(--muted)', lineHeight: 1.9 }}>
             {tx.about_body}
           </p>
 
-          <div style={{ marginTop: 32 }}>
-            <div style={{ fontSize: 10, color: 'var(--muted)', marginBottom: 12 }}>
+          <div style={{ marginTop: 'var(--gap-stack-lg)' }}>
+            <div style={{ fontSize: 10, color: 'var(--muted)', marginBottom: 'var(--gap-stack-sm)' }}>
               {tx.roles_label}
             </div>
-            <div style={{ display: 'flex', flexWrap: 'wrap', gap: 6 }}>
+            <div style={{ display: 'flex', flexWrap: 'wrap', gap: 'var(--gap-tags)' }}>
               {tx.roles.map(role => (
                 <motion.span
                   key={role}
@@ -77,7 +77,7 @@ export default function AboutSection() {
             <div key={label} style={{
               display: 'flex',
               justifyContent: 'space-between',
-              padding: '11px 0',
+              padding: '14px 0',
               borderBottom: '1px solid var(--border)',
               fontSize: 12,
               gap: 16,
@@ -87,8 +87,8 @@ export default function AboutSection() {
             </div>
           ))}
 
-          <div style={{ marginTop: 28 }}>
-            <div style={{ fontSize: 10, color: 'var(--muted)', marginBottom: 12 }}>
+          <div style={{ marginTop: 'var(--gap-stack-md)' }}>
+            <div style={{ fontSize: 10, color: 'var(--muted)', marginBottom: 'var(--gap-stack-sm)' }}>
               {tx.approach_label}
             </div>
             {tx.approach.map((item, i) => (
@@ -100,7 +100,7 @@ export default function AboutSection() {
                 style={{
                   fontSize: 12,
                   color: 'var(--muted)',
-                  padding: '7px 0',
+                  padding: '10px 0',
                   borderBottom: '1px solid var(--border)',
                   display: 'flex',
                   alignItems: 'center',

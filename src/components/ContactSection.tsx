@@ -28,16 +28,16 @@ export default function ContactSection() {
 
   return (
     <section ref={ref} id="contact">
-      <div style={{ padding: isMobile ? '20px 24px' : '20px 48px', borderBottom: '1px solid var(--border)', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+      <div style={{ padding: isMobile ? 'var(--pad-section-y-mobile) var(--pad-x-mobile)' : 'var(--pad-section-y) var(--pad-x)', borderBottom: '1px solid var(--border)', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
         <span style={{ fontSize: 10, color: 'var(--muted)', letterSpacing: '0.08em' }}>{tx.contact_label}</span>
         <span style={{ fontSize: 10, color: 'var(--muted)', letterSpacing: '0.06em' }}>05</span>
       </div>
 
       <div style={{
-        padding: isMobile ? '40px 24px' : '80px 48px',
+        padding: isMobile ? '48px var(--pad-x-mobile)' : '88px var(--pad-x)',
         display: 'grid',
         gridTemplateColumns: isMobile ? '1fr' : '1fr 1fr',
-        gap: isMobile ? 32 : 64,
+        gap: isMobile ? 40 : 72,
         alignItems: 'start',
       }}>
         <motion.div

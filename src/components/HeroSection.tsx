@@ -23,7 +23,7 @@ export default function HeroSection() {
 
   return (
     <section style={{
-      padding: isMobile ? '36px 24px 48px' : '48px 48px 64px',
+      padding: isMobile ? '40px var(--pad-x-mobile) 56px' : '56px var(--pad-x) 72px',
       borderBottom: '1px solid var(--border)',
     }}>
 

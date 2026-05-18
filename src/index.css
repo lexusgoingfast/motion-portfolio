@@ -13,6 +13,18 @@
   --nav-hover-bg: #181818;
   --nav-hover-fg: #ffffff;
   --font: Arial, sans-serif;
+  --pad-x: 48px;
+  --pad-x-mobile: 24px;
+  --pad-row-y: 32px;
+  --pad-row-y-mobile: 28px;
+  --pad-section-y: 28px;
+  --pad-section-y-mobile: 24px;
+  --gap-inline: 32px;
+  --gap-inline-mobile: 16px;
+  --gap-stack-sm: 16px;
+  --gap-stack-md: 24px;
+  --gap-stack-lg: 40px;
+  --gap-tags: 10px;
 }
 
 :root[data-theme='dark'] {

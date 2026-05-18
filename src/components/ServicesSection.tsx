@@ -10,11 +10,12 @@ export default function ServicesSection() {
   const ref = useRef<HTMLElement>(null)
   const inView = useInView(ref, { once: true, margin: '-60px' })
   const isMobile = useIsMobile()
-  const px = isMobile ? '20px' : '40px'
+  const px = isMobile ? 'var(--pad-x-mobile)' : 'var(--pad-x)'
+  const sectionPadY = isMobile ? 'var(--pad-section-y-mobile)' : 'var(--pad-section-y)'
 
   return (
     <section ref={ref} id="services" style={{ borderBottom: '1px solid var(--border)' }}>
-      <div style={{ padding: `20px ${px}`, borderBottom: '1px solid var(--border)', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+      <div style={{ padding: `${sectionPadY} ${px}`, borderBottom: '1px solid var(--border)', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
         <span style={{ fontSize: 10, color: 'var(--muted)', letterSpacing: '0.08em' }}>{tx.services_label}</span>
         <span style={{ fontSize: 10, color: 'var(--muted)', letterSpacing: '0.06em' }}>03</span>
       </div>
@@ -28,8 +29,8 @@ export default function ServicesSection() {
           style={{
             display: 'grid',
             gridTemplateColumns: isMobile ? '1fr' : '1fr 1fr',
-            gap: isMobile ? 4 : 40,
-            padding: isMobile ? `20px ${px}` : `24px ${px}`,
+            gap: isMobile ? 12 : 48,
+            padding: isMobile ? `var(--pad-row-y-mobile) ${px}` : `var(--pad-row-y) ${px}`,
             borderBottom: '1px solid var(--border)',
             alignItems: 'start',
           }}
@@ -40,10 +41,10 @@ export default function ServicesSection() {
       ))}
 
       <div style={{
-        padding: `24px ${px}`,
+        padding: `var(--gap-stack-md) ${px} var(--gap-stack-lg)`,
         display: 'grid',
         gridTemplateColumns: isMobile ? '1fr' : '1fr 1fr',
-        gap: isMobile ? 8 : 40,
+        gap: isMobile ? 12 : 48,
         alignItems: 'start',
       }}>
         <span style={{ fontSize: 10, color: 'var(--muted)',  }}>{tx.tools_label}</span>

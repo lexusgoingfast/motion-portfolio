@@ -22,7 +22,9 @@ function WorkRow({ work, i, lang }: { work: WorkRowItem; i: number; lang: 'en' |
   const [open, setOpen] = useState(false)
   const [hovered, setHovered] = useState(false)
   const isMobile = useIsMobile()
-  const px = isMobile ? '20px' : '40px'
+  const px = isMobile ? 'var(--pad-x-mobile)' : 'var(--pad-x)'
+  const rowPadY = isMobile ? 'var(--pad-row-y-mobile)' : 'var(--pad-row-y)'
+  const colGap = isMobile ? 'var(--gap-inline-mobile)' : 'var(--gap-inline)'
   const caseHref = getCasePagePath(work.slug)
   const desktopCols = '32px minmax(0,1fr) 180px 110px 70px 14px'
 
@@ -41,9 +43,9 @@ function WorkRow({ work, i, lang }: { work: WorkRowItem; i: number; lang: 'en' |
         style={{
           display: 'grid',
           gridTemplateColumns: isMobile ? '1fr auto' : desktopCols,
-          columnGap: isMobile ? 12 : 20,
+          columnGap: colGap,
           alignItems: 'center',
-          padding: `22px ${px}`,
+          padding: `${rowPadY} ${px}`,
           cursor: 'none',
           background: hovered ? 'var(--hover)' : 'transparent',
           transition: 'background 0.15s',
@@ -78,7 +80,7 @@ function WorkRow({ work, i, lang }: { work: WorkRowItem; i: number; lang: 'en' |
           <span style={{ fontSize: 11, color: 'var(--muted)', justifySelf: 'end', whiteSpace: 'nowrap' }}>{work.year}</span>
         )}
         {isMobile ? (
-          <div style={{ display: 'flex', alignItems: 'center', gap: 12 }}>
+          <div style={{ display: 'flex', alignItems: 'center', gap: 'var(--gap-inline-mobile)' }}>
             <span style={{ fontSize: 11, color: 'var(--muted)' }}>{work.year}</span>
             <motion.span
               animate={{ rotate: open ? 45 : 0 }}
@@ -108,14 +110,14 @@ function WorkRow({ work, i, lang }: { work: WorkRowItem; i: number; lang: 'en' |
             transition={{ duration: 0.28, ease: [0.16, 1, 0.3, 1] }}
             style={{ overflow: 'hidden' }}
           >
-            <div style={{ padding: `0 ${px} 24px` }}>
-              <p style={{ fontSize: 12, color: 'var(--muted)', lineHeight: 1.85, maxWidth: 500, marginBottom: 16 }}>
+            <div style={{ padding: `var(--gap-stack-sm) ${px} var(--gap-stack-lg)` }}>
+              <p style={{ fontSize: 12, color: 'var(--muted)', lineHeight: 1.9, maxWidth: 520, marginBottom: 'var(--gap-stack-md)' }}>
                 {work.desc}
               </p>
-              <div style={{ display: 'flex', gap: 6, flexWrap: 'wrap' }}>
+              <div style={{ display: 'flex', gap: 'var(--gap-tags)', flexWrap: 'wrap' }}>
                 {work.tags.map(tag => (
                   <span key={tag} style={{
-                    padding: '3px 9px',
+                    padding: '5px 12px',
                     border: '1px solid var(--border)',
                     borderRadius: 2,
                     fontSize: 10,
@@ -137,6 +139,9 @@ function WorkRow({ work, i, lang }: { work: WorkRowItem; i: number; lang: 'en' |
 export default function WorkList() {
   const { lang } = useLang()
   const isMobile = useIsMobile()
+  const px = isMobile ? 'var(--pad-x-mobile)' : 'var(--pad-x)'
+  const sectionPadY = isMobile ? 'var(--pad-section-y-mobile)' : 'var(--pad-section-y)'
+  const colGap = isMobile ? 'var(--gap-inline-mobile)' : 'var(--gap-inline)'
   const works: WorkRowItem[] = projects.map(p => ({
     slug: p.slug,
     index: p.index,
@@ -156,11 +161,11 @@ export default function WorkList() {
   return (
     <section id="work">
       <div style={{
-        padding: isMobile ? '20px 24px' : '20px 48px',
+        padding: `${sectionPadY} ${px}`,
         borderBottom: '1px solid var(--border)',
         display: 'grid',
         gridTemplateColumns: isMobile ? '1fr auto' : desktopCols,
-        columnGap: isMobile ? 12 : 20,
+        columnGap: colGap,
       }}>
         {(isMobile ? mobileHeaders[lang] : headers[lang]).map((h, idx) => (
           <span

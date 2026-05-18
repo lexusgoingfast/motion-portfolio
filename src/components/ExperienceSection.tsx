@@ -17,7 +17,7 @@ export default function ExperienceSection() {
       initial={{ opacity: 0 }}
       animate={inView ? { opacity: 1 } : {}}
       transition={{ duration: 0.4 }}
-      style={{ padding: '18px 0', borderBottom: last ? 'none' : '1px solid var(--border)' }}
+      style={{ padding: 'var(--gap-stack-md) 0', borderBottom: last ? 'none' : '1px solid var(--border)' }}
     >
       <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: 4 }}>
         <span style={{ fontSize: 13, fontWeight: 500, letterSpacing: '-0.01em' }}>{label}</span>
@@ -30,7 +30,7 @@ export default function ExperienceSection() {
   return (
     <section ref={ref} id="experience" style={{ borderBottom: '1px solid var(--border)' }}>
       <div style={{
-        padding: isMobile ? '20px 24px' : '20px 48px',
+        padding: isMobile ? 'var(--pad-section-y-mobile) var(--pad-x-mobile)' : 'var(--pad-section-y) var(--pad-x)',
         borderBottom: '1px solid var(--border)',
         display: 'flex',
         justifyContent: 'space-between',
@@ -44,17 +44,17 @@ export default function ExperienceSection() {
       </div>
 
       {isMobile ? (
-        <div style={{ padding: '0 20px' }}>
+        <div style={{ padding: '0 var(--pad-x-mobile)' }}>
           {tx.experience.map((item, i) => colItem(item.company, item.role, item.period, i === tx.experience.length - 1))}
-          <div style={{ fontSize: 10, color: 'var(--muted)', padding: '20px 0 0' }}>{tx.edu_label}</div>
+          <div style={{ fontSize: 10, color: 'var(--muted)', padding: 'var(--gap-stack-md) 0 0' }}>{tx.edu_label}</div>
           {tx.education.map((item, i) => colItem(item.school, item.program, item.period, i === tx.education.length - 1))}
         </div>
       ) : (
-        <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', padding: '0 48px' }}>
-          <div style={{ paddingRight: 40, borderRight: '1px solid var(--border)' }}>
+        <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', padding: '0 var(--pad-x)' }}>
+          <div style={{ paddingRight: 'var(--gap-stack-lg)', borderRight: '1px solid var(--border)' }}>
             {tx.experience.map((item, i) => colItem(item.company, item.role, item.period, i === tx.experience.length - 1))}
           </div>
-          <div style={{ paddingLeft: 40 }}>
+          <div style={{ paddingLeft: 'var(--gap-stack-lg)' }}>
             {tx.education.map((item, i) => colItem(item.school, item.program, item.period, i === tx.education.length - 1))}
           </div>
         </div>
