@@ -3,8 +3,9 @@ import { motion, useInView, AnimatePresence } from 'motion/react'
 import { useLang } from '../LangContext'
 import { useIsMobile } from '../useIsMobile'
 import { projects, getCasePagePath } from '../data/projects'
+import EnterButton from './EnterButton'
 
-const viewLabel = { en: 'View project →', ru: 'Открыть →' }
+const enterLabel = { en: 'Enter', ru: 'Войти' }
 const sectionLabel = { en: 'Work', ru: 'Работы' }
 
 type WorkRowItem = {
@@ -35,20 +36,17 @@ function WorkRow({ work, i, lang }: { work: WorkRowItem; i: number; lang: 'en' |
       transition={{ duration: 0.4, delay: i * 0.06 }}
       style={{ borderBottom: '1px solid var(--border)' }}
     >
-      <motion.div
-        onClick={() => setOpen(!open)}
-        onMouseEnter={() => setHovered(true)}
-        onMouseLeave={() => setHovered(false)}
+      <div
         style={{
           display: 'flex',
           flexDirection: 'column',
-          alignItems: 'stretch',
           gap: 'var(--gap-stack-sm)',
           padding: `${rowPadY} ${px}`,
-          cursor: 'none',
           background: hovered ? 'var(--hover)' : 'transparent',
           transition: 'background 0.15s',
         }}
+        onMouseEnter={() => setHovered(true)}
+        onMouseLeave={() => setHovered(false)}
       >
         <motion.div
           style={{
@@ -58,7 +56,21 @@ function WorkRow({ work, i, lang }: { work: WorkRowItem; i: number; lang: 'en' |
             gap: 'var(--gap-stack-md)',
           }}
         >
-          <div style={{ flex: 1, minWidth: 0 }}>
+          <button
+            type="button"
+            onClick={() => setOpen(!open)}
+            style={{
+              flex: 1,
+              minWidth: 0,
+              padding: 0,
+              border: 'none',
+              background: 'transparent',
+              textAlign: 'left',
+              cursor: isMobile ? 'pointer' : 'none',
+              color: 'inherit',
+              font: 'inherit',
+            }}
+          >
             <span
               style={{
                 display: 'block',
@@ -81,53 +93,55 @@ function WorkRow({ work, i, lang }: { work: WorkRowItem; i: number; lang: 'en' |
             >
               {work.title}
             </h3>
+          </button>
+
+          <div style={{ display: 'flex', alignItems: 'flex-start', gap: 'var(--gap-stack-sm)' }}>
+            <button
+              type="button"
+              onClick={() => setOpen(!open)}
+              aria-expanded={open}
+              aria-label={open ? 'Collapse' : 'Expand'}
+              style={{
+                marginTop: 20,
+                padding: 0,
+                border: 'none',
+                background: 'transparent',
+                cursor: isMobile ? 'pointer' : 'none',
+                color: 'var(--muted)',
+                fontSize: 15,
+                lineHeight: 1,
+              }}
+            >
+              <motion.span
+                animate={{ rotate: open ? 45 : 0 }}
+                transition={{ duration: 0.2 }}
+                style={{ display: 'block' }}
+              >
+                +
+              </motion.span>
+            </button>
+            <EnterButton
+              href={caseHref}
+              label={enterLabel[lang]}
+              onClick={(e) => e.stopPropagation()}
+            />
           </div>
-          <motion.span
-            animate={{ rotate: open ? 45 : 0 }}
-            transition={{ duration: 0.2 }}
-            style={{
-              flexShrink: 0,
-              fontSize: 15,
-              color: 'var(--muted)',
-              lineHeight: 1,
-              marginTop: 18,
-            }}
-          >
-            +
-          </motion.span>
         </motion.div>
 
-        <motion.div
+        <div
           style={{
             display: 'flex',
             flexWrap: 'wrap',
             alignItems: 'center',
             gap: 'var(--gap-stack-sm) var(--gap-stack-md)',
+            paddingRight: isMobile ? 0 : 88,
           }}
         >
           <span style={{ fontSize: 11, color: 'var(--muted)' }}>{work.category}</span>
           <span style={{ fontSize: 11, color: 'var(--muted)', opacity: 0.5 }}>·</span>
           <span style={{ fontSize: 11, color: 'var(--muted)' }}>{work.year}</span>
-          <a
-            href={caseHref}
-            onClick={(e) => e.stopPropagation()}
-            style={{
-              fontSize: 11,
-              fontWeight: 500,
-              color: 'var(--text)',
-              borderBottom: '1px solid var(--border)',
-              paddingBottom: 1,
-              lineHeight: 1.2,
-              textDecoration: 'none',
-              cursor: 'none',
-              whiteSpace: 'nowrap',
-              marginLeft: isMobile ? 0 : 'auto',
-            }}
-          >
-            {viewLabel[lang]}
-          </a>
-        </motion.div>
-      </motion.div>
+        </div>
+      </div>
 
       <AnimatePresence>
         {open && (
@@ -138,7 +152,7 @@ function WorkRow({ work, i, lang }: { work: WorkRowItem; i: number; lang: 'en' |
             transition={{ duration: 0.28, ease: [0.16, 1, 0.3, 1] }}
             style={{ overflow: 'hidden' }}
           >
-            <div style={{ padding: `0 ${px} var(--gap-stack-lg)` }}>
+            <motion.div style={{ padding: `0 ${px} var(--gap-stack-lg)` }}>
               <p
                 style={{
                   fontSize: 12,
@@ -167,7 +181,7 @@ function WorkRow({ work, i, lang }: { work: WorkRowItem; i: number; lang: 'en' |
                   </span>
                 ))}
               </div>
-            </div>
+            </motion.div>
           </motion.div>
         )}
       </AnimatePresence>

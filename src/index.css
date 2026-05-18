@@ -143,3 +143,66 @@ button { font-family: var(--font); }
 @media (max-width: 767px) {
   body { cursor: auto; }
 }
+
+.enter-btn {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 76px;
+  height: 76px;
+  border-radius: 50%;
+  border: 1px solid var(--border);
+  color: var(--text);
+  text-decoration: none;
+  cursor: none;
+  flex-shrink: 0;
+  background: transparent;
+  isolation: isolate;
+  transition: border-color 0.2s ease, background 0.2s ease;
+}
+
+.enter-btn:hover {
+  border-color: color-mix(in srgb, var(--text) 55%, var(--border));
+  background: var(--hover);
+}
+
+.enter-btn__orbit {
+  position: absolute;
+  inset: -7px;
+  border-radius: 50%;
+  border: 1px solid var(--border);
+  opacity: 0;
+  transform: scale(0.9);
+  transition: opacity 0.28s ease, transform 0.28s ease;
+  pointer-events: none;
+}
+
+.enter-btn:hover .enter-btn__orbit {
+  opacity: 1;
+  transform: scale(1);
+}
+
+.enter-btn__label {
+  position: relative;
+  z-index: 1;
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  line-height: 1;
+}
+
+@media (max-width: 767px) {
+  .enter-btn {
+    width: 64px;
+    height: 64px;
+    cursor: pointer;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .enter-btn__orbit {
+    transition: none;
+  }
+}
