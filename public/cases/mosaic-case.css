@@ -40,7 +40,7 @@
 }
 
 .case__col {
-  max-width: min(1040px, 100%);
+  max-width: 720px;
   overflow: visible;
 }
 
@@ -369,33 +369,13 @@
 }
 
 .case__lead {
-  font-size: clamp(18px, 1.95vw, 22px);
+  font-size: clamp(15px, 1.55vw, 17px);
   font-weight: 400;
   color: var(--text);
-  line-height: 1.55;
-  letter-spacing: -0.015em;
-  max-width: 720px;
-  margin-bottom: var(--s3);
-  hyphens: auto;
-  hanging-punctuation: first last;
-  text-wrap: pretty;
-  display: flow-root;
-}
-
-.case__lead::first-letter {
-  float: left;
-  font-size: 5.4em;
-  line-height: 0.86;
-  font-weight: 500;
-  letter-spacing: -0.04em;
-  padding: 0.05em 0.14em 0 0;
-  color: var(--text);
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .case__lead::first-letter {
-    transition: color 0.3s;
-  }
+  line-height: 1.7;
+  letter-spacing: -0.01em;
+  max-width: 680px;
+  margin-bottom: var(--s2);
 }
 
 .case__lead--en {
@@ -404,14 +384,6 @@
   font-size: 13px;
   color: var(--muted);
   line-height: 1.75;
-}
-
-.case__lead--en::first-letter {
-  float: none;
-  font-size: inherit;
-  font-weight: inherit;
-  line-height: inherit;
-  padding: 0;
 }
 
 .case__role {
@@ -449,41 +421,35 @@
 
 .case__scope {
   display: grid;
-  grid-template-columns: minmax(140px, 200px) 1fr;
-  gap: var(--s3) var(--s4);
-  padding: var(--s4) 0;
+  grid-template-columns: 96px 1fr;
+  gap: var(--s2) var(--s3);
+  padding: var(--s3) 0;
   border-top: 1px solid var(--border);
 }
 
 .case__scope:first-of-type {
   border-top: 0;
-  padding-top: var(--s3);
+  padding-top: var(--s2);
 }
 
 .case__scope-head {
   display: flex;
   flex-direction: column;
-  gap: var(--s3);
-  position: sticky;
-  top: var(--s3);
-  align-self: start;
+  gap: var(--s2);
 }
 
 .case__scope-num {
-  font-size: clamp(56px, 6.4vw, 88px);
-  font-weight: 200;
-  letter-spacing: -0.03em;
-  line-height: 0.86;
-  color: var(--text);
-  text-transform: none;
-  font-variant-numeric: tabular-nums;
+  font-size: 10px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--muted);
 }
 
 .case__scope-tag {
   display: inline-block;
   align-self: start;
   font-size: 9px;
-  letter-spacing: 0.18em;
+  letter-spacing: 0.16em;
   text-transform: uppercase;
   color: var(--muted);
   border: 1px solid var(--border);
@@ -492,50 +458,23 @@
 }
 
 .case__scope-title {
-  font-size: clamp(18px, 1.95vw, 22px);
+  font-size: clamp(14px, 1.4vw, 16px);
   font-weight: 500;
-  letter-spacing: -0.02em;
-  line-height: 1.2;
+  letter-spacing: -0.01em;
+  line-height: 1.35;
   color: var(--text);
-  text-wrap: balance;
-  margin-top: var(--s1);
 }
 
 .case__scope-body {
-  max-width: none;
-  columns: 2;
-  column-gap: var(--s4);
-  column-rule: 1px solid var(--border);
-  hyphens: auto;
-  hanging-punctuation: first last;
-}
-
-.case__scope-body .case__prose {
-  break-inside: avoid;
-}
-
-@media (max-width: 900px) {
-  .case__scope {
-    grid-template-columns: 1fr;
-    gap: var(--s2) 0;
-    padding: var(--s3) 0;
-  }
-  .case__scope-head {
-    position: static;
-    flex-direction: row;
-    align-items: baseline;
-    gap: var(--s3);
-    flex-wrap: wrap;
-  }
-  .case__scope-body {
-    columns: 1;
-    column-rule: none;
-  }
+  max-width: 560px;
 }
 
 @media (max-width: 600px) {
-  .case__scope-num { font-size: 56px; }
-  .case__scope-title { font-size: 17px; margin-top: 0; flex-basis: 100%; }
+  .case__scope {
+    grid-template-columns: 1fr;
+    gap: var(--s1);
+  }
+  .case__scope-title { font-size: 15px; }
 }
 
 .case__h2 {
@@ -547,64 +486,19 @@
 }
 
 .case__prose {
-  font-size: 14px;
+  font-size: 13.5px;
   color: var(--muted);
-  line-height: 1.8;
-  letter-spacing: -0.003em;
-  hyphens: auto;
-  hanging-punctuation: first last;
-  text-wrap: pretty;
+  line-height: 1.85;
 }
 
 .case__prose--lead {
   color: var(--text);
-  font-size: clamp(16px, 1.7vw, 19px);
-  font-weight: 400;
-  line-height: 1.55;
-  letter-spacing: -0.012em;
-  max-width: 760px;
-  margin-bottom: var(--s3);
-  text-wrap: balance;
+  font-size: 14px;
+  margin-bottom: var(--s2);
 }
 
 .case__prose + .case__prose {
   margin-top: var(--s2);
-}
-
-.case__pullquote {
-  display: block;
-  margin: var(--s3) 0 var(--s4);
-  padding: var(--s3) 0;
-  border-top: 1px solid var(--border);
-  border-bottom: 1px solid var(--border);
-  font-size: clamp(22px, 2.6vw, 32px);
-  font-weight: 300;
-  line-height: 1.35;
-  letter-spacing: -0.025em;
-  color: var(--text);
-  max-width: 820px;
-  text-wrap: balance;
-}
-
-.case__pullquote[data-pos="top"] {
-  margin-top: 0;
-}
-
-.case__pullquote-mark {
-  display: block;
-  font-size: 10px;
-  letter-spacing: 0.22em;
-  text-transform: uppercase;
-  color: var(--muted);
-  margin-bottom: var(--s2);
-  font-weight: 400;
-}
-
-@media (max-width: 600px) {
-  .case__pullquote {
-    font-size: 20px;
-    margin: var(--s3) 0;
-  }
 }
 
 .case__split {
