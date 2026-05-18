@@ -43,6 +43,16 @@ body {
 ::-webkit-scrollbar-thumb { background: var(--muted); }
 
 a { text-decoration: none; color: inherit; }
+
+.sidebar-nav:hover {
+  background-color: #181818;
+  color: #ffffff;
+}
+
+:root[data-theme='dark'] .sidebar-nav:hover {
+  background-color: #f0f0f0;
+  color: #111111;
+}
 button { font-family: var(--font); }
 
 @media (max-width: 767px) {

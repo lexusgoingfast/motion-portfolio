@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react'
+import { Link } from 'react-router-dom'
 import { motion, AnimatePresence } from 'motion/react'
 import { useLang } from '../LangContext'
 import { useTheme } from '../ThemeContext'
@@ -32,26 +33,30 @@ export default function Sidebar() {
 
   const navItems = (
     <>
-      {tx.nav.map((item, i) => (
-        <motion.a
-          key={item}
-          href={`#${t.en.nav[i].toLowerCase().replace(/\s/g, '-')}`}
-          onClick={() => { setActive(item); setMobileOpen(false) }}
-          whileHover={{ backgroundColor: theme === 'dark' ? '#f0f0f0' : '#181818', color: theme === 'dark' ? '#111111' : '#ffffff' }}
-          transition={{ duration: 0.15 }}
-          style={{
-            display: 'flex',
-            alignItems: 'center',
-            padding: isMobile ? '12px 24px' : '9px 24px 9px 10px',
-            fontSize: 12,
-            fontWeight: active === item ? 500 : 400,
-            color: active === item ? 'var(--text)' : 'var(--muted)',
-            cursor: 'none',
-          }}
-        >
-          {item}
-        </motion.a>
-      ))}
+      {tx.nav.map((item, i) => {
+        const section = t.en.nav[i].toLowerCase().replace(/\s/g, '-')
+        return (
+          <Link
+            key={item}
+            to="/"
+            state={{ section }}
+            onClick={() => { setActive(item); setMobileOpen(false) }}
+            className="sidebar-nav"
+            style={{
+              display: 'flex',
+              alignItems: 'center',
+              padding: isMobile ? '12px 24px' : '9px 24px 9px 10px',
+              fontSize: 12,
+              fontWeight: active === item ? 500 : 400,
+              color: active === item ? 'var(--text)' : 'var(--muted)',
+              cursor: 'none',
+              transition: 'background-color 0.15s, color 0.15s',
+            }}
+          >
+            {item}
+          </Link>
+        )
+      })}
     </>
   )
 

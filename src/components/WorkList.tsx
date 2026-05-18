@@ -2,107 +2,30 @@ import { useRef, useState } from 'react'
 import { motion, useInView, AnimatePresence } from 'motion/react'
 import { useLang } from '../LangContext'
 import { useIsMobile } from '../useIsMobile'
-
-const worksData = {
-  en: [
-    {
-      index: '01',
-      title: 'UX/UI — IBLS',
-      year: '2022–2024',
-      category: 'Interfaces / Product',
-      desc: 'Full-cycle UX/UI design for digital product: user research, information architecture, wireframes, UI components, and prototype delivery.',
-      tags: ['UX/UI', 'Figma', 'Product Design'],
-    },
-    {
-      index: '02',
-      title: 'Visual & Digital — ПИК',
-      year: '2024–2026',
-      category: 'Brand / Digital',
-      desc: 'Visual digital communications, AI-driven visual production, UX/UI for internal products, and presentation design for one of Russia\'s largest real estate developers.',
-      tags: ['Art Direction', 'AI Visual', 'UX/UI', 'Presentations'],
-    },
-    {
-      index: '03',
-      title: 'AI Visual — Tape Production',
-      year: '2026',
-      category: 'AI / Content',
-      desc: 'AI-assisted visual production pipeline, YouTube thumbnail design, and video content direction.',
-      tags: ['Midjourney', 'Kling', 'Content Design'],
-    },
-    {
-      index: '04',
-      title: 'Kinetic Glitch Type',
-      year: '2024',
-      category: 'Motion / Experiment',
-      desc: 'Real-time dot-matrix typography renderer with procedural glitch displacement. Configurable dot size, gap, colours, and glitch strength.',
-      tags: ['React', 'Canvas 2D', 'TypeScript'],
-      href: '../kinetic/typo-glitch/',
-    },
-    {
-      index: '05',
-      title: 'Mosaic Logo Animation',
-      year: '2024',
-      category: 'Motion / Experiment',
-      desc: 'Canvas engine scattering and reassembling a logo from thousands of colour-matched particles with configurable easing and phase timing.',
-      tags: ['Canvas 2D', 'Vanilla JS', 'Generative'],
-      href: '../mosaic-animation/index.html',
-    },
-  ],
-  ru: [
-    {
-      index: '01',
-      title: 'UX/UI — IBLS',
-      year: '2022–2024',
-      category: 'Интерфейсы / Продукт',
-      desc: 'Полный цикл UX/UI дизайна для цифрового продукта: ресерч, информационная архитектура, вайрфреймы, UI-компоненты, прототипы.',
-      tags: ['UX/UI', 'Figma', 'Product Design'],
-    },
-    {
-      index: '02',
-      title: 'Visual & Digital — ПИК',
-      year: '2024–2026',
-      category: 'Бренд / Digital',
-      desc: 'Визуальные digital-коммуникации, AI-визуал, UX/UI для внутренних продуктов и презентации для одного из крупнейших девелоперов России.',
-      tags: ['Art Direction', 'AI Visual', 'UX/UI', 'Презентации'],
-    },
-    {
-      index: '03',
-      title: 'AI Visual — Tape Production',
-      year: '2026',
-      category: 'AI / Контент',
-      desc: 'AI-пайплайн для визуального производства, дизайн YouTube-превью, арт-дирекшн видеоконтента.',
-      tags: ['Midjourney', 'Kling', 'Content Design'],
-    },
-    {
-      index: '04',
-      title: 'Kinetic Glitch Type',
-      year: '2024',
-      category: 'Моушн / Эксперимент',
-      desc: 'Рендерер точечной типографики в реальном времени с процедуральным глич-смещением. Настраиваемые размер точек, отступы, цвета и сила глича.',
-      tags: ['React', 'Canvas 2D', 'TypeScript'],
-      href: '../kinetic/typo-glitch/',
-    },
-    {
-      index: '05',
-      title: 'Mosaic Logo Animation',
-      year: '2024',
-      category: 'Моушн / Эксперимент',
-      desc: 'Canvas-движок, рассыпающий и собирающий логотип из тысяч частиц с настройкой easing и фазовым тайммингом.',
-      tags: ['Canvas 2D', 'Vanilla JS', 'Generative'],
-      href: '../mosaic-animation/index.html',
-    },
-  ],
-}
+import { projects, getCasePagePath } from '../data/projects'
 
 const viewLabel = { en: 'View project →', ru: 'Открыть →' }
+const demoLabel = { en: 'Live demo →', ru: 'Демо →' }
 
-function WorkRow({ work, i, lang }: { work: typeof worksData.en[0]; i: number; lang: 'en' | 'ru' }) {
+type WorkRowItem = {
+  index: string
+  slug: string
+  title: string
+  year: string
+  category: string
+  desc: string
+  tags: string[]
+  demoUrl?: string
+}
+
+function WorkRow({ work, i, lang }: { work: WorkRowItem; i: number; lang: 'en' | 'ru' }) {
   const ref = useRef<HTMLDivElement>(null)
   const inView = useInView(ref, { once: true, margin: '-40px' })
   const [open, setOpen] = useState(false)
   const [hovered, setHovered] = useState(false)
   const isMobile = useIsMobile()
   const px = isMobile ? '20px' : '40px'
+  const caseHref = getCasePagePath(work.slug)
 
   return (
     <motion.div
@@ -131,6 +54,22 @@ function WorkRow({ work, i, lang }: { work: typeof worksData.en[0]; i: number; l
         <span style={{ fontSize: 13, fontWeight: 500, letterSpacing: '-0.01em' }}>{work.title}</span>
         {!isMobile && <span style={{ fontSize: 11, color: 'var(--muted)', whiteSpace: 'nowrap' }}>{work.category}</span>}
         <div style={{ display: 'flex', alignItems: 'center', gap: 14 }}>
+          <a
+            href={caseHref}
+            onClick={(e) => e.stopPropagation()}
+            style={{
+              fontSize: 11,
+              fontWeight: 500,
+              color: 'var(--text)',
+              borderBottom: '1px solid rgba(0,0,0,0.25)',
+              paddingBottom: 1,
+              lineHeight: 1.2,
+              textDecoration: 'none',
+              cursor: 'none',
+            }}
+          >
+            {viewLabel[lang]}
+          </a>
           <span style={{ fontSize: 11, color: 'var(--muted)' }}>{work.year}</span>
           <motion.span
             animate={{ rotate: open ? 45 : 0 }}
@@ -155,7 +94,7 @@ function WorkRow({ work, i, lang }: { work: typeof worksData.en[0]; i: number; l
               <p style={{ fontSize: 12, color: 'var(--muted)', lineHeight: 1.85, maxWidth: 500, marginBottom: 16 }}>
                 {work.desc}
               </p>
-              <div style={{ display: 'flex', gap: 6, flexWrap: 'wrap', marginBottom: work.href ? 16 : 0 }}>
+              <div style={{ display: 'flex', gap: 6, flexWrap: 'wrap', marginBottom: work.demoUrl ? 12 : 0 }}>
                 {work.tags.map(tag => (
                   <span key={tag} style={{
                     padding: '3px 9px',
@@ -169,10 +108,11 @@ function WorkRow({ work, i, lang }: { work: typeof worksData.en[0]; i: number; l
                   </span>
                 ))}
               </div>
-              {work.href && (
-                <motion.a
-                  href={work.href}
-                  whileHover={{ x: 3 }}
+              {work.demoUrl && (
+                <a
+                  href={work.demoUrl}
+                  target="_blank"
+                  rel="noreferrer"
                   style={{
                     display: 'inline-flex',
                     alignItems: 'center',
@@ -184,8 +124,8 @@ function WorkRow({ work, i, lang }: { work: typeof worksData.en[0]; i: number; l
                     cursor: 'none',
                   }}
                 >
-                  {viewLabel[lang]}
-                </motion.a>
+                  {demoLabel[lang]}
+                </a>
               )}
             </div>
           </motion.div>
@@ -198,7 +138,16 @@ function WorkRow({ work, i, lang }: { work: typeof worksData.en[0]; i: number; l
 export default function WorkList() {
   const { lang } = useLang()
   const isMobile = useIsMobile()
-  const works = worksData[lang]
+  const works: WorkRowItem[] = projects.map(p => ({
+    slug: p.slug,
+    index: p.index,
+    title: p[lang].title,
+    year: p[lang].year,
+    category: p[lang].category,
+    desc: p[lang].desc,
+    tags: p[lang].tags,
+    demoUrl: p.demoUrl,
+  }))
   const headers = {
     en: ['#', 'title', 'type', 'year'],
     ru: ['#', 'название', 'тип', 'год'],
@@ -220,7 +169,7 @@ export default function WorkList() {
       </div>
 
       {works.map((w, i) => (
-        <WorkRow key={`${lang}-${w.index}`} work={w} i={i} lang={lang} />
+        <WorkRow key={`${lang}-${w.slug}`} work={w} i={i} lang={lang} />
       ))}
     </section>
   )

@@ -4,21 +4,6 @@ import { useLang } from '../LangContext'
 import { t } from '../lang'
 import { useIsMobile } from '../useIsMobile'
 
-function RegMark({ size = 28 }: { size?: number }) {
-  const r = size * 0.3
-  const half = size / 2
-  const gap = size * 0.14
-  return (
-    <svg width={size} height={size} viewBox={`0 0 ${size} ${size}`} fill="none" stroke="currentColor" strokeWidth="0.75">
-      <circle cx={half} cy={half} r={r} />
-      <line x1={half} y1={0} x2={half} y2={half - r - gap} />
-      <line x1={half} y1={half + r + gap} x2={half} y2={size} />
-      <line x1={0} y1={half} x2={half - r - gap} y2={half} />
-      <line x1={half + r + gap} y1={half} x2={size} y2={half} />
-    </svg>
-  )
-}
-
 export default function HeroSection() {
   const { lang } = useLang()
   const tx = t[lang]
