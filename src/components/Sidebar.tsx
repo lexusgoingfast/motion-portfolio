@@ -217,6 +217,7 @@ export default function Sidebar() {
           lineHeight: 1.65,
           color: 'var(--muted)',
           maxWidth: 220,
+          whiteSpace: 'pre-line',
         }}>
           {tx.sidebar_tagline}
         </p>
