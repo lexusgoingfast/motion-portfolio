@@ -71,6 +71,31 @@
   max-width: min(1180px, calc(100vw - var(--s4)));
 }
 
+.case__pair {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) clamp(124px, 16%, 184px);
+  column-gap: var(--s2);
+  align-items: end;
+}
+
+.case__pair > .case__frame {
+  margin: 0;
+}
+
+.case__pair > .case__frame--desktop {
+  align-self: stretch;
+  min-width: 0;
+}
+
+.case__pair > .case__frame--mobile {
+  align-self: end;
+}
+
+.case__frame-body--mobile {
+  aspect-ratio: 9 / 19.5;
+  position: relative;
+}
+
 .case__cell--a { grid-column: 1 / span 8;  grid-row: 1; }
 .case__cell--b { grid-column: 8 / span 5;  grid-row: 2; }
 .case__cell--c { grid-column: 4 / span 9;  grid-row: 3; }
@@ -138,6 +163,23 @@
   }
   .case__note { margin-top: calc(-1 * var(--s2)); }
   .case__note-text { max-width: none; margin-left: 0; }
+
+  .case__pair {
+    grid-template-columns: minmax(0, 1fr) 140px;
+    column-gap: var(--s2);
+  }
+}
+
+@media (max-width: 560px) {
+  .case__pair {
+    grid-template-columns: 1fr;
+    column-gap: 0;
+    row-gap: var(--s2);
+    align-items: start;
+  }
+  .case__pair > .case__frame--mobile {
+    max-width: 220px;
+  }
 }
 
 .case__frame-body--hero,
