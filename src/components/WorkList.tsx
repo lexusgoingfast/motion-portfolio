@@ -171,7 +171,6 @@ export default function WorkList() {
             fontSize: 10,
             color: 'var(--muted)',
             letterSpacing: '0.08em',
-            textTransform: 'lowercase',
           }}
         >
           {sectionLabel[lang]}
