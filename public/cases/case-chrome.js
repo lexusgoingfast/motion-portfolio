@@ -526,7 +526,7 @@ function g() {
 	});
 }
 function _(e, t, n, r) {
-	let i = n + (-500 * (e - t) + -32 * n) / .5 * r;
+	let i = n + (-620 * (e - t) + -26 * n) / .4 * r;
 	return [e + i * r, i];
 }
 function v() {
@@ -544,15 +544,41 @@ function v() {
 	};
 	requestAnimationFrame(c);
 }
-function y() {
+var y = "cubic-bezier(0.16, 1, 0.3, 1)", b = 550;
+function x(e) {
+	e.getAnimations().forEach((e) => e.cancel()), e.style.transform = "";
+}
+function S(e) {
+	x(e);
+	let t = e.animate([
+		{ transform: "translateY(0%)" },
+		{
+			transform: "translateY(-115%)",
+			offset: .36
+		},
+		{
+			transform: "translateY(115%)",
+			offset: .36
+		},
+		{ transform: "translateY(0%)" }
+	], {
+		duration: b,
+		easing: y,
+		fill: "forwards"
+	});
+	t.onfinish = () => {
+		e.style.transform = "translateY(0%)";
+	};
+}
+function C() {
 	document.querySelectorAll(".enter-btn").forEach((e) => {
-		let t = () => {
-			e.setAttribute("data-hovered", ""), document.body.classList.add("enter-btn-hover");
-		}, n = () => {
-			e.removeAttribute("data-hovered"), document.body.classList.remove("enter-btn-hover");
+		let t = e.querySelector(".enter-btn__text-track"), n = () => {
+			e.setAttribute("data-hovered", ""), document.body.classList.add("enter-btn-hover"), !h && t && S(t);
+		}, r = () => {
+			e.removeAttribute("data-hovered"), document.body.classList.remove("enter-btn-hover"), t && x(t);
 		};
-		e.addEventListener("mouseenter", t), e.addEventListener("mouseleave", n), e.addEventListener("focus", t), e.addEventListener("blur", n);
+		e.addEventListener("mouseenter", n), e.addEventListener("mouseleave", r), e.addEventListener("focus", n), e.addEventListener("blur", r);
 	});
 }
-g(), v(), y();
+g(), v(), C();
 //#endregion

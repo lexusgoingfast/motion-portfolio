@@ -149,6 +149,37 @@ body.enter-btn-hover .case-cursor {
   mix-blend-mode: normal;
 }
 
+body.work-cursor-active .case-cursor[data-work-preview] {
+  mix-blend-mode: normal;
+}
+
+.work-cursor-preview {
+  border-radius: 2px;
+  overflow: hidden;
+  box-shadow:
+    0 0 0 1px rgba(240, 240, 240, 0.08),
+    0 12px 40px rgba(0, 0, 0, 0.45);
+}
+
+.work-cursor-preview__img--native {
+  display: block;
+  width: auto;
+  height: auto;
+  max-width: none;
+}
+
+.work-cursor-preview__img--mosaic-gif {
+  display: block;
+  width: 100px;
+  height: auto;
+}
+
+.work-cursor-preview__img--sized {
+  display: block;
+  object-fit: contain;
+  background: #111;
+}
+
 .enter-btn {
   --enter-surface: #f0f0f0;
   --enter-ink: #111111;

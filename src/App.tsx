@@ -3,6 +3,7 @@ import { Routes, Route, Navigate } from 'react-router-dom'
 import { LangProvider } from './LangContext'
 import { ThemeProvider } from './ThemeContext'
 import Cursor from './components/Cursor'
+import { CursorPreviewProvider } from './CursorPreviewContext'
 import Sidebar from './components/Sidebar'
 import Main from './components/Main'
 import LegacyWorkRedirect from './pages/LegacyWorkRedirect'
@@ -30,13 +31,15 @@ export default function App() {
     <ThemeProvider>
       <LangProvider>
         <SmoothScroll>
-          <Cursor />
-          <ScrollToSection />
+          <CursorPreviewProvider>
+            <Cursor />
+            <ScrollToSection />
           <Routes>
             <Route path="/" element={<Shell><Main /></Shell>} />
             <Route path="/work/:slug" element={<Shell><LegacyWorkRedirect /></Shell>} />
             <Route path="*" element={<Navigate to="/" replace />} />
           </Routes>
+          </CursorPreviewProvider>
         </SmoothScroll>
       </LangProvider>
     </ThemeProvider>

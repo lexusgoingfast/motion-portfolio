@@ -143,6 +143,8 @@ body.enter-btn-hover .case-cursor {
   background: var(--enter-ink);
   transform: scaleY(0);
   transform-origin: top center;
+  will-change: transform;
+  backface-visibility: hidden;
   transition: transform 0.55s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
@@ -187,6 +189,12 @@ body.enter-btn-hover .case-cursor {
   display: inline-flex;
   align-items: center;
   gap: 10px;
+}
+
+.enter-btn__text-track {
+  display: block;
+  height: 1em;
+  will-change: transform;
 }
 
 .enter-btn__text {

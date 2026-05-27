@@ -1,8 +1,10 @@
-import { useRef, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { motion, useInView, AnimatePresence } from 'motion/react'
 import { useLang } from '../LangContext'
 import { useIsMobile } from '../useIsMobile'
+import { useCursorPreview } from '../CursorPreviewContext'
 import { projects, getCasePagePath } from '../data/projects'
+import { getWorkCursorPreview } from '../workCursor'
 import EnterButton from './EnterButton'
 
 const enterLabel = { en: 'Open', ru: 'Открыть' }
@@ -23,7 +25,19 @@ function WorkRow({ work, i, lang }: { work: WorkRowItem; i: number; lang: 'en' |
   const inView = useInView(ref, { once: true, margin: '-40px' })
   const [open, setOpen] = useState(false)
   const [hovered, setHovered] = useState(false)
+  const [rowHovered, setRowHovered] = useState(false)
   const isMobile = useIsMobile()
+  const { setPreview } = useCursorPreview()
+  const rowPreview = getWorkCursorPreview(work.slug)
+
+  useEffect(() => {
+    if (!isMobile && open) setPreview(null)
+  }, [open, isMobile, setPreview])
+
+  useEffect(() => {
+    if (isMobile || open || !rowHovered || !rowPreview) return
+    setPreview(rowPreview)
+  }, [open, rowHovered, isMobile, rowPreview, setPreview])
   const px = isMobile ? 'var(--pad-x-mobile)' : 'var(--pad-x)'
   const rowPadY = isMobile ? 'var(--pad-row-y-mobile)' : 'var(--pad-row-y)'
   const caseHref = getCasePagePath(work.slug)
@@ -35,6 +49,14 @@ function WorkRow({ work, i, lang }: { work: WorkRowItem; i: number; lang: 'en' |
       animate={inView ? { opacity: 1 } : {}}
       transition={{ duration: 0.4, delay: i * 0.06 }}
       style={{ borderBottom: '1px solid var(--border)' }}
+      onMouseEnter={() => {
+        setRowHovered(true)
+        if (!isMobile && rowPreview && !open) setPreview(rowPreview)
+      }}
+      onMouseLeave={() => {
+        setRowHovered(false)
+        if (!isMobile) setPreview(null)
+      }}
     >
       <motion.div
         role="button"
@@ -42,7 +64,11 @@ function WorkRow({ work, i, lang }: { work: WorkRowItem; i: number; lang: 'en' |
         aria-expanded={open}
         aria-label={open ? (lang === 'ru' ? 'Свернуть кейс' : 'Collapse case') : (lang === 'ru' ? 'Развернуть кейс' : 'Expand case')}
         className="work-row-toggle"
-        onClick={() => setOpen(!open)}
+        onClick={() => {
+          const next = !open
+          setOpen(next)
+          if (!isMobile && next) setPreview(null)
+        }}
         onKeyDown={(e) => {
           if (e.key === 'Enter' || e.key === ' ') {
             e.preventDefault()
@@ -145,6 +171,7 @@ function WorkRow({ work, i, lang }: { work: WorkRowItem; i: number; lang: 'en' |
 export default function WorkList() {
   const { lang } = useLang()
   const isMobile = useIsMobile()
+  const { setPreview } = useCursorPreview()
   const px = isMobile ? 'var(--pad-x-mobile)' : 'var(--pad-x)'
   const sectionPadY = isMobile ? 'var(--pad-section-y-mobile)' : 'var(--pad-section-y)'
 
@@ -159,7 +186,12 @@ export default function WorkList() {
   }))
 
   return (
-    <section id="work">
+    <section
+      id="work"
+      onMouseLeave={() => {
+        if (!isMobile) setPreview(null)
+      }}
+    >
       <div
         style={{
           padding: `${sectionPadY} ${px}`,

@@ -25,9 +25,9 @@ function initSmoothScroll() {
 }
 
 function springStep(current: number, target: number, velocity: number, dt: number) {
-  const stiffness = 500
-  const damping = 32
-  const mass = 0.5
+  const stiffness = 620
+  const damping = 26
+  const mass = 0.4
   const spring = -stiffness * (current - target)
   const damper = -damping * velocity
   const accel = (spring + damper) / mass
@@ -81,17 +81,45 @@ function initCursor() {
   requestAnimationFrame(tick)
 }
 
+const ENTER_EASE = 'cubic-bezier(0.16, 1, 0.3, 1)'
+const ENTER_DURATION = 550
+
+function resetEnterMotion(el: HTMLElement) {
+  el.getAnimations().forEach((animation) => animation.cancel())
+  el.style.transform = ''
+}
+
+function playEnterTextTrack(track: HTMLElement) {
+  resetEnterMotion(track)
+  const animation = track.animate(
+    [
+      { transform: 'translateY(0%)' },
+      { transform: 'translateY(-115%)', offset: 0.36 },
+      { transform: 'translateY(115%)', offset: 0.36 },
+      { transform: 'translateY(0%)' },
+    ],
+    { duration: ENTER_DURATION, easing: ENTER_EASE, fill: 'forwards' },
+  )
+  animation.onfinish = () => {
+    track.style.transform = 'translateY(0%)'
+  }
+}
+
 function initEnterButtons() {
   const buttons = document.querySelectorAll<HTMLAnchorElement>('.enter-btn')
 
   buttons.forEach((btn) => {
+    const track = btn.querySelector<HTMLElement>('.enter-btn__text-track')
+
     const on = () => {
       btn.setAttribute('data-hovered', '')
       document.body.classList.add('enter-btn-hover')
+      if (!reducedMotion && track) playEnterTextTrack(track)
     }
     const off = () => {
       btn.removeAttribute('data-hovered')
       document.body.classList.remove('enter-btn-hover')
+      if (track) resetEnterMotion(track)
     }
 
     btn.addEventListener('mouseenter', on)
